@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using WeekendWindow.Contracts;
 using WeekendWindow.Data;
 using WeekendWindow.Models;
 
@@ -15,16 +16,23 @@ namespace WeekendWindow.Controllers
     {
         private readonly ApplicationDbContext _context;
 
-        public ViewersController(ApplicationDbContext context)
+        private IForecastRequest _forecastRequest;
+
+        public ViewersController(ApplicationDbContext context, IForecastRequest forecastRequest)
         {
+            _forecastRequest = forecastRequest;
+            
             _context = context;
         }
 
         // GET: Viewers
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Viewers.Include(v => v.IdentityUser);
-            return View(await applicationDbContext.ToListAsync());
+            WeatherForecast forecast = await _forecastRequest.GetWeatherForecast();
+            return View(forecast);
+
+            //var applicationDbContext = _context.Viewers.Include(v => v.IdentityUser);
+            //return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Viewers/Details/5

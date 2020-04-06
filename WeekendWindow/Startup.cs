@@ -15,6 +15,8 @@ using Microsoft.Extensions.Hosting;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using WeekendWindow.ActionFilters;
+using WeekendWindow.Contracts;
+using WeekendWindow.Services;
 
 namespace WeekendWindow
 {
@@ -42,6 +44,8 @@ namespace WeekendWindow
             { 
                 config.Filters.Add(typeof(GlobalRouting)); 
             });
+
+            services.AddScoped<IForecastRequest, ForecastRequest>();
 
             services.AddControllersWithViews();
             services.AddRazorPages();
