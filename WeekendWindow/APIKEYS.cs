@@ -7,6 +7,6 @@ namespace WeekendWindow
 {
     static class APIKEYS
     {
-        public static readonly string GooglePlace_Key = "test";
+        public static readonly string GooglePlace_Key = "IFYOUSEETHISITDIDNTWORK";
     }
 }
