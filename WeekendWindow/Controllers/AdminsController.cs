@@ -162,15 +162,15 @@ namespace WeekendWindow.Controllers
         public static async Task SendSms()
         {
             // Find your Account Sid and Token at twilio.com/console
-            const string accountSid = "ACc0f1430439ef148f248ad7935e58ce62";
-            const string authToken = "0726aab68766dee6457b5b2efba4be93";
+            const string accountSid = "";
+            const string authToken = "";
 
             TwilioClient.Init(accountSid, authToken);
 
             var message = await MessageResource.CreateAsync(
                 body: "The weather will be great this weekend",
-                from: new Twilio.Types.PhoneNumber("+19135218316"),
-                to: new Twilio.Types.PhoneNumber("+13607204065")
+                from: new Twilio.Types.PhoneNumber("+"),
+                to: new Twilio.Types.PhoneNumber("+")
             );
 
             Console.WriteLine(message.Sid);
