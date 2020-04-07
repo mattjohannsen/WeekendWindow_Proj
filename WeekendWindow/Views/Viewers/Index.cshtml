@@ -1,53 +1,32 @@
 ﻿@model WeekendWindow.Models.WeatherForecast
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "View";
 }
 
-<h1>Index</h1>
+<h1>View</h1>
 
 <div>
     <h4>WeatherForecast</h4>
+    <h5>@ViewData["City"]</h5>
+    <h5>@ViewData["State"]</h5>
+       
     <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.city_name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.city_name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.state_code)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.state_code)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.lon)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.data[2].weather.description)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.timezone)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.timezone)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.lat)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.lat)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.country_code)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.country_code)
-        </dd>
+    
+        <table>
+            <tr><th>Condition   </th> <th> Saturday                 </th><th> Sunday                    </th>  </tr>
+            <tr><td>Date        </td> <td>@ViewData["SatDate"]      </td><td>@ViewData["SunDate"]       </td>  </tr>
+            <tr><td>High Temp   </td> <td>@ViewData["SatHighTemp"]  </td><td>@ViewData["SunHighTemp"]   </td>  </tr>
+            <tr><td>Low Temp    </td> <td>@ViewData["SatLowTemp"]   </td><td>@ViewData["SunLowTemp"]    </td>  </tr>
+            <tr><td>Wind Speed  </td> <td>@ViewData["SatWindSpeed"] </td><td>@ViewData["SunWindSpeed"]  </td>  </tr>
+            <tr><td>Gusts to    </td> <td>@ViewData["SatGustsTo"]   </td><td>@ViewData["SunGustsTo"]    </td>  </tr>
+            <tr><td>Wind Dir    </td> <td>@ViewData["SatWindDir"]   </td><td>@ViewData["SunWindDir"]    </td>  </tr>
+            <tr><td>Skies       </td> <td>@ViewData["SatSkies"]     </td><td>@ViewData["SunSkies"]      </td>  </tr>
+        </table>
 
-    </dl>
+    
+
+   
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.WeatherForecastId">Edit</a> |
