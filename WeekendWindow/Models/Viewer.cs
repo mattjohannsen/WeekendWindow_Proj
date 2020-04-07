@@ -19,7 +19,7 @@ namespace WeekendWindow.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
         public int? HomeLocationId { get; set; }
-        public string NotificationDay { get; set; }
+        public string NotificationDay { get; set; } //testtest
 
     }
 }
