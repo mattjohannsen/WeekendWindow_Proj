@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using WeekendWindow.Contracts;
 using WeekendWindow.Data;
 using WeekendWindow.Models;
+using WeekendWindow.Services;
 
 namespace WeekendWindow.Controllers
 {
@@ -15,16 +18,61 @@ namespace WeekendWindow.Controllers
     {
         private readonly ApplicationDbContext _context;
 
-        public ViewersController(ApplicationDbContext context)
+        private IForecastRequest _forecastRequest;
+
+        public ViewersController(ApplicationDbContext context, IForecastRequest forecastRequest)
         {
+            _forecastRequest = forecastRequest;
+            
             _context = context;
         }
 
         // GET: Viewers
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Viewers.Include(v => v.IdentityUser);
-            return View(await applicationDbContext.ToListAsync());
+            //var data = new List<WeatherForecast>();
+
+            WeatherForecast forecast = await _forecastRequest.GetWeatherForecast();
+            DateTime dt = DateTime.Today;
+            DayOfWeek dw = dt.DayOfWeek;
+
+            int num = (int)DateTime.Today.DayOfWeek;
+            int num2 = (int)dw;
+
+            DateTime satNum = DateTime.Today.AddDays(6 - num2);
+            DateTime sunNum = satNum.AddDays(1);
+
+            string sat = satNum.ToString("yyy-MM-dd", DateTimeFormatInfo.InvariantInfo);
+            string sun = sunNum.ToString("yyy-MM-dd", DateTimeFormatInfo.InvariantInfo);
+
+            var data = forecast.data.Where(d => (d.valid_date == sat) || (d.valid_date == sun)).ToList();
+
+            ViewData["City"] = forecast.city_name;
+            ViewData["State"] = forecast.state_code;
+
+            //Saturday Weather
+            ViewData["SatDate"] = data[0].valid_date;
+            ViewData["SatHighTemp"] = data[0].high_temp;
+            ViewData["SatLowTemp"] = data[0].low_temp;
+            ViewData["SatWindSpeed"] = data[0].wind_spd;
+            ViewData["SatGustsTo"] = data[0].wind_gust_spd;
+            ViewData["SatWindDir"] = data[0].wind_dir;
+            ViewData["SatSkies"] = data[0].weather.description;
+
+            //Sunday Weather
+            ViewData["SunDate"] = data[1].valid_date;
+            ViewData["SunHighTemp"] = data[1].high_temp;
+            ViewData["SunLowTemp"] = data[1].low_temp;
+            ViewData["SunWindSpeed"] = data[1].wind_spd;
+            ViewData["SunGustsTo"] = data[1].wind_gust_spd;
+            ViewData["SunWindDir"] = data[1].wind_dir;
+            ViewData["SunSkies"] = data[1].weather.description;
+
+
+            return View(forecast);
+
+            //var applicationDbContext = _context.Viewers.Include(v => v.IdentityUser);
+            //return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Viewers/Details/5

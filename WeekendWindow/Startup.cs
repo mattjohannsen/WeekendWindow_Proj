@@ -45,6 +45,8 @@ namespace WeekendWindow
                 config.Filters.Add(typeof(GlobalRouting)); 
             });
 
+            services.AddScoped<IForecastRequest, ForecastRequest>();
+
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddScoped<INearbySearchRequest, NearbyPlaceSearchRequest>();

@@ -219,11 +219,15 @@ namespace WeekendWindow.Data
         public DbSet<Models.Viewer> Viewers { get; set; }
         public DbSet<Models.ViewerLocation> ViewerLocation { get; set; }
         public DbSet<Models.Admin> Admins { get; set; }
+<<<<<<< HEAD
         public DbSet<Models.State> State { get; set; }
         public DbSet<Models.Attitude> Attitude { get; set; }
         public DbSet<Models.TravelRadius> TravelRadius { get; set; }
         public DbSet<Models.GooglePlaces> GooglePlaces { get; set; }
         public DbSet<Models.GooglePlacesAttitude> GooglePlacesAttitude { get; set; }
         public DbSet<WeekendWindow.Models.NearbyPlaces> NearbyPlaces { get; set; }
+=======
+        public DbSet<WeekendWindow.Models.WeatherForecast> WeatherForecast { get; set; }
+>>>>>>> 0623d057d8c0dae3d0530b0d3760c97a7f0648f6
     }
 }
