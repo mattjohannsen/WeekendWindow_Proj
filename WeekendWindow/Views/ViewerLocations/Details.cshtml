@@ -1,0 +1,73 @@
+﻿@model WeekendWindow.Models.ViewerLocation
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout-Viewers.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>ViewerLocation</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Viewer)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Viewer.ViewerId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ViewerLocationName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ViewerLocationName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ViewerLocationAddress)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ViewerLocationAddress)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ViewerLocationCity)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ViewerLocationCity)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.State)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.State.StateId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ViewerLocationZip)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ViewerLocationZip)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ViewerLocationLong)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ViewerLocationLong)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ViewerLocationLat)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ViewerLocationLat)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ViewerIsHomeLocation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ViewerIsHomeLocation)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ViewerLocationId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

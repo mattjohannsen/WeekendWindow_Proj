@@ -350,7 +350,3 @@ MigrationBackup/
 .ionide/
 
 WeekendWindow/APIKEYS.cs
-
-WeekendWindow/Test.cs
-
-
