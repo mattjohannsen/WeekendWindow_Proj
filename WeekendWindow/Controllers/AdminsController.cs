@@ -20,35 +20,46 @@ namespace WeekendWindow.Controllers
         public AdminsController(ApplicationDbContext context)
         {
             _context = context;
-            //SendSms1().Wait(); 
+            SendSms1().Wait(); 
             //ViewersController.CreateNotification();
         }
 
         // GET: Admins
         // GET: Admins
-        public async Task<IActionResult> Index()
-        {
-            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            Admin currentAdmin = _context.Admins.Where(a => a.IdentityUserId == userId).FirstOrDefault();
-            var applicationDbContext = _context.Admins.Include(a => a.IdentityUser);
-            var currentDay = DateTime.Now.DayOfWeek.ToString();
-            var viewerslist = _context.Viewers.Where(v => v.NotificationDay == currentDay).ToList();
-            currentAdmin.ViewersToNotify = viewerslist;
-
-            
-           
-
-            return View(currentAdmin);
-            //return View(await applicationDbContext.ToListAsync());
-        }
-        
-         
-
         //public async Task<IActionResult> Index()
         //{
-        //    var applicationDbContext = _context.Admins.Include(a => a.IdentityUser);
-        //    return View(await applicationDbContext.ToListAsync());
+        //    var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+        //    Admin currentAdmin = _context.Admins.Where(a => a.IdentityUserId == userId).FirstOrDefault();
+        //    //var applicationDbContext = _context.Admins.Include(a => a.IdentityUser);
+        //    var currentDay = DateTime.Now.DayOfWeek.ToString();
+        //    var viewerslist = _context.Viewers.Where(v => v.NotificationDay == currentDay).ToList();
+        //    currentAdmin.ViewersToNotify = viewerslist;
+
+
+
+
+        //    return View(currentAdmin);
+        //    //return View(await applicationDbContext.ToListAsync());
         //}
+
+        public async Task<IActionResult> CreateSMS()
+        {
+
+            var currentDay = DateTime.Now.DayOfWeek.ToString();
+            var viewersList = _context.Viewers.Where(v => v.NotificationDay == currentDay).ToList();
+            Admin admin = new Admin();
+            admin.ViewersToNotify = viewersList;
+
+            
+
+            return View(viewersList);
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var applicationDbContext = _context.Admins.Include(a => a.IdentityUser);
+            return View(await applicationDbContext.ToListAsync());
+        }
 
         // GET: Admins/Details/5
         public async Task<IActionResult> Details(int? id)

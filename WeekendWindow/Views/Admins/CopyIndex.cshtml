@@ -1,0 +1,30 @@
+﻿@model WeekendWindow.Models.Admin
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout-Admin.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Admin</h4>
+    <hr />
+    <dl class="row">
+        @foreach (var item in Model.ViewersToNotify)
+        {
+            <tr>
+                <td>
+                    <p>
+                        @Html.DisplayFor(modelItem => item.IdentityUser.PhoneNumber) - @Html.DisplayFor(modelItem => item.FirstName) -
+                        - @Html.DisplayFor(modelItem => item.LastName) - @DateTime.Now.DayOfWeek
+                    </p>
+                </td>
+            </tr>
+        }
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.AdminId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
