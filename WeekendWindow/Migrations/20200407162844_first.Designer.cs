@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WeekendWindow.Data;
 
-namespace WeekendWindow.Data.Migrations
+namespace WeekendWindow.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200405224122_addnotificationlisttoviewermodel")]
-    partial class addnotificationlisttoviewermodel
+    [Migration("20200407162844_first")]
+    partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,15 +50,15 @@ namespace WeekendWindow.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "d8c06ba2-9923-40d6-8474-de15a510f0ae",
-                            ConcurrencyStamp = "ed3fdbad-4ca5-4638-b53d-df541dd0ce9f",
+                            Id = "c1cda75e-7305-4991-b37d-79a2c8f85cf2",
+                            ConcurrencyStamp = "50c7e412-2ba1-4553-b5e5-0efa6bfa109a",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "be748548-df38-4e48-be0a-aa0db979503d",
-                            ConcurrencyStamp = "203c5d9f-5ebe-4ed7-b11e-eeaa1d9cc051",
+                            Id = "f499470c-26ed-4450-8ad5-966621f6fe85",
+                            ConcurrencyStamp = "c63155af-c4ec-4eac-b148-b560b300c47c",
                             Name = "Viewer",
                             NormalizedName = "VIEWER"
                         });
@@ -233,6 +233,74 @@ namespace WeekendWindow.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("WeekendWindow.Models.Admin", b =>
+                {
+                    b.Property<int>("AdminId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IdentityUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("AdminId");
+
+                    b.HasIndex("IdentityUserId");
+
+                    b.ToTable("Admins");
+                });
+
+            modelBuilder.Entity("WeekendWindow.Models.Location", b =>
+                {
+                    b.Property<int>("LocationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsHomeLocation")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LocationAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LocationCity")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LocationLat")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LocationLong")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LocationName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("LocationStateId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LocationViewerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LocationZip")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StateId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ViewerId")
+                        .HasColumnType("int");
+
+                    b.HasKey("LocationId");
+
+                    b.ToTable("Location");
+                });
+
             modelBuilder.Entity("WeekendWindow.Models.Viewer", b =>
                 {
                     b.Property<int>("ViewerId")
@@ -311,6 +379,13 @@ namespace WeekendWindow.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("WeekendWindow.Models.Admin", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
+                        .WithMany()
+                        .HasForeignKey("IdentityUserId");
                 });
 
             modelBuilder.Entity("WeekendWindow.Models.Viewer", b =>

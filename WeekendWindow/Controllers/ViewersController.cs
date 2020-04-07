@@ -20,7 +20,7 @@ namespace WeekendWindow.Controllers
         public ViewersController(ApplicationDbContext context)
         {
             _context = context;
-            SendSms1().Wait();
+           
         }
 
         // GET: Viewers
@@ -165,32 +165,5 @@ namespace WeekendWindow.Controllers
             return _context.Viewers.Any(e => e.ViewerId == id);
         }
 
-        public async Task<IActionResult> CreateNotification()
-        {
-
-         
-        }
-
-        public static async Task SendSms1()
-        {
-
-            const string accountSid = "ACc0f1430439ef148f248ad7935e58ce62";
-            const string authToken = "9cb7125ea25ea4eececb6d2fcb925a28";
-
-            TwilioClient.Init(accountSid, authToken);
-            Viewer viewer = _context.Viewer.Where(p => p.NotificationDay == DayOfWeek).FirstOrDefault();
-            if (viewer == null)
-            {
-              
-            }
-
-            var message = await MessageResource.CreateAsync(
-                body: "Start setting up your weekend!!!!",
-                from: new Twilio.Types.PhoneNumber("+19135218316"),
-                to: new Twilio.Types.PhoneNumber("+13607204065")
-            );
-
-            Console.WriteLine(message.Sid);
-        }
     }
 }
