@@ -224,5 +224,6 @@ namespace WeekendWindow.Data
         public DbSet<Models.TravelRadius> TravelRadius { get; set; }
         public DbSet<Models.GooglePlaces> GooglePlaces { get; set; }
         public DbSet<Models.GooglePlacesAttitude> GooglePlacesAttitude { get; set; }
+        public DbSet<WeekendWindow.Models.NearbyPlaces> NearbyPlaces { get; set; }
     }
 }

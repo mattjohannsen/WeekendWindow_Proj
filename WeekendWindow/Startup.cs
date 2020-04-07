@@ -15,6 +15,8 @@ using Microsoft.Extensions.Hosting;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using WeekendWindow.ActionFilters;
+using WeekendWindow.Contracts;
+using WeekendWindow.Services;
 
 namespace WeekendWindow
 {
@@ -45,6 +47,7 @@ namespace WeekendWindow
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddScoped<INearbySearchRequest, NearbyPlaceSearchRequest>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,0 +1,82 @@
+﻿@model WeekendWindow.ViewModels.MapViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NearbyPlaces.results[0].name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NearbyPlaces.results[0].place_id)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.NearbyPlaces.results.Length; i++)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.NearbyPlaces.results[i].name)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.NearbyPlaces.results[i].place_id)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+<br />
+@*<iframe width="600"
+            height="450"
+            frameborder="0" style="border:0"
+            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDYYB2ZbLsO5Y7WiDcBgOrAsDhg08sbZVw
+        &q=place_id:{@Model.NearbyPlaces.results[0].place_id}" allowfullscreen>
+    </iframe>*@
+
+<style>
+    /* Set the size of the div element that contains the map */
+    #map {
+        height: 400px; /* The height is 400 pixels */
+        width: 100%; /* The width is the width of the web page */
+    }
+</style>
+
+<div id="map"></div>
+<script>
+    // Initialize and add the map
+    function initMap() {
+        var address = { lat: @Model.NearbyPlaces.results[0].geometry.location.lat, lng: @Model.NearbyPlaces.results[0].geometry.location.lng };
+        var map = new google.maps.Map(
+            document.getElementById('map'), { zoom: 4, center: address });
+        //var marker = new google.maps.Marker({ position: address, map: map });
+    }
+    window.eqfeed_callback = function(results) {
+        for (var i = 0; i < results.features.length; i++) {
+          var coords = results.features[i].geometry.coordinates;
+          var latLng = new google.maps.LatLng(coords[1],coords[0]);
+          var marker = new google.maps.Marker({
+            position: latLng,
+            map: map
+          });
+        }
+      }
+</script>
+<!--Load the API from the specified URL
+* The async attribute allows the browser to render the page while the API loads
+* The key parameter will contain your own API key (which is not needed for this tutorial)
+* The callback parameter executes the initMap() function
+-->
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYYB2ZbLsO5Y7WiDcBgOrAsDhg08sbZVw&callback=initMap">
+</script>
