@@ -20,7 +20,7 @@ namespace WeekendWindow.Controllers
         public AdminsController(ApplicationDbContext context)
         {
             _context = context;
-            SendSms1().Wait(); 
+            //SendSms1().Wait(); 
             //ViewersController.CreateNotification();
         }
 
@@ -30,14 +30,19 @@ namespace WeekendWindow.Controllers
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             Admin currentAdmin = _context.Admins.Where(a => a.IdentityUserId == userId).FirstOrDefault();
-            //var applicationDbContext = _context.Admins.Include(a => a.IdentityUser);
+            var applicationDbContext = _context.Admins.Include(a => a.IdentityUser);
             var currentDay = DateTime.Now.DayOfWeek.ToString();
             var viewerslist = _context.Viewers.Where(v => v.NotificationDay == currentDay).ToList();
             currentAdmin.ViewersToNotify = viewerslist;
 
+            
+           
+
             return View(currentAdmin);
             //return View(await applicationDbContext.ToListAsync());
         }
+        
+         
 
         //public async Task<IActionResult> Index()
         //{
@@ -179,7 +184,7 @@ namespace WeekendWindow.Controllers
         {
 
             const string accountSid = APIKEYS.TwilioSid;
-            const string authToken = APIKEYS.TwilioToden;
+            const string authToken = APIKEYS.TwilioToken;
 
             TwilioClient.Init(accountSid, authToken);
 
