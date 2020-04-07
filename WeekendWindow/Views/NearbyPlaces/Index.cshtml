@@ -54,36 +54,15 @@
         var address = { lat: @Model.NearbyPlaces.results[0].geometry.location.lat, lng: @Model.NearbyPlaces.results[0].geometry.location.lng};
         var map = new google.maps.Map(
             document.getElementById('map'), { zoom: 15, center: address });
-        var numOfPlaces = @Model.NearbyPlaces.results.Length;
 
-        var markers = [];
-        var places = [];
-        places = @Model.NearbyPlaces.results;
-        @*for (var i = 0; i < numOfPlaces; i++) {
-            markers.push({
-            coords: { lat: @Model.NearbyPlaces.results[i].geometry.location.lat, lng: @Model.NearbyPlaces.results[i].geometry.location.lng },
-                content: '<h1>@Model.NearbyPlaces.results[i].name</h1>'
-            })
+        @foreach(Result result in Model.NearbyPlaces.results)
+        {
+            <text> addMarker({
+            coords: { lat: @result.geometry.location.lat, lng: @result.geometry.location.lng },
+            content: '<h2>@result.name</h2>' + '<br>' + '<h5>Price Level(0-5): @result.price_level</h5>' + '<h5>Rating(0-5): @result.rating</h5>'
+                    +'<h5>@result.vicinity</h5>'
+            });</text>
         }
-        for (var i = 0; i < markers.length; i++) {
-            addMarker({
-            coords: { lat: @Model.NearbyPlaces.results[i].geometry.location.lat, lng: @Model.NearbyPlaces.results[i].geometry.location.lng },
-                content: '<h1>@Model.NearbyPlaces.results[i].name</h1>'
-            });
-        }*@
-        places.forEach(addMarkers);
-
-        function addMarkers(markers, @Model.NearbyPlaces.results) {
-            markers.push({
-            coords: { lat: @Model.NearbyPlaces.results[0].geometry.location.lat, lng: @Model.NearbyPlaces.results[0].geometry.location.lng },
-                content: '<h1>@Model.NearbyPlaces.results[0].name</h1>'
-            })
-            addMarker({
-            coords: { lat: @Model.NearbyPlaces.results[0].geometry.location.lat, lng: @Model.NearbyPlaces.results[0].geometry.location.lng },
-                content: '<h1>@Model.NearbyPlaces.results[0].name</h1>'
-            });
-        }
-
         function addMarker(props) {
             var marker = new google.maps.Marker({ position: props.coords, map: map });
             if (props.content) {
