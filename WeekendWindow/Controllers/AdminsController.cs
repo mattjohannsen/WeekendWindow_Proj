@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -24,11 +25,25 @@ namespace WeekendWindow.Controllers
         }
 
         // GET: Admins
+        // GET: Admins
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Admins.Include(a => a.IdentityUser);
-            return View(await applicationDbContext.ToListAsync());
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            Admin currentAdmin = _context.Admins.Where(a => a.IdentityUserId == userId).FirstOrDefault();
+            //var applicationDbContext = _context.Admins.Include(a => a.IdentityUser);
+            var currentDay = DateTime.Now.DayOfWeek.ToString();
+            var viewerslist = _context.Viewers.Where(v => v.NotificationDay == currentDay).ToList();
+            currentAdmin.ViewersToNotify = viewerslist;
+
+            return View(currentAdmin);
+            //return View(await applicationDbContext.ToListAsync());
         }
+
+        //public async Task<IActionResult> Index()
+        //{
+        //    var applicationDbContext = _context.Admins.Include(a => a.IdentityUser);
+        //    return View(await applicationDbContext.ToListAsync());
+        //}
 
         // GET: Admins/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -163,8 +178,8 @@ namespace WeekendWindow.Controllers
         public static async Task SendSms1()
         {
 
-            const string accountSid = "ACc0f1430439ef148f248ad7935e58ce62";
-            const string authToken = "9cb7125ea25ea4eececb6d2fcb925a28";
+            const string accountSid = APIKEYS.TwilioSid;
+            const string authToken = APIKEYS.TwilioToden;
 
             TwilioClient.Init(accountSid, authToken);
 
