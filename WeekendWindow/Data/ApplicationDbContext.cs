@@ -37,5 +37,6 @@ namespace WeekendWindow.Data
 
 		public DbSet<WeekendWindow.Models.Location> Location { get; set; }
         public DbSet<Models.Admin> Admins { get; set; }
+        public DbSet<WeekendWindow.Models.WeatherForecast> WeatherForecast { get; set; }
     }
 }

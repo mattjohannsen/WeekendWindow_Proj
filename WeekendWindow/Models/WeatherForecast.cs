@@ -1,8 +1,12 @@
 ﻿
+using System;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace WeekendWindow.Models
 {
     public class WeatherForecast
     {
+        public int WeatherForecastId { get; set; }
         public Datum[] data { get; set; }
         public string city_name { get; set; }
         public string lon { get; set; }
@@ -10,10 +14,16 @@ namespace WeekendWindow.Models
         public string lat { get; set; }
         public string country_code { get; set; }
         public string state_code { get; set; }
+
+        internal object Where(Func<object, bool> p)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class Datum
     {
+        public int DatumId { get; set; }
         public int moonrise_ts { get; set; }
         public string wind_cdir { get; set; }
         public int rh { get; set; }
@@ -41,6 +51,7 @@ namespace WeekendWindow.Models
         public float uv { get; set; }
         public Weather weather { get; set; }
         public int wind_dir { get; set; }
+        [NotMapped]
         public object max_dhi { get; set; }
         public int clouds_hi { get; set; }
         public float precip { get; set; }
@@ -56,6 +67,7 @@ namespace WeekendWindow.Models
 
     public class Weather
     {
+        public int WeatherId { get; set; }
         public string icon { get; set; }
         public int code { get; set; }
         public string description { get; set; }

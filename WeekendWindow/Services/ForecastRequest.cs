@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -22,9 +24,16 @@ namespace WeekendWindow.Services
             HttpResponseMessage response = await client.GetAsync(url);
             if (response.IsSuccessStatusCode)
             {
+               
+
                 string json = await response.Content.ReadAsStringAsync();
+                
                 WeatherForecast forecast = JsonConvert.DeserializeObject<WeatherForecast>(json);
+
+                
+
                 return forecast;
+                
             }
             return null;
         }

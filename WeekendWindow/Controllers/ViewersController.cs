@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using WeekendWindow.Contracts;
 using WeekendWindow.Data;
 using WeekendWindow.Models;
+using WeekendWindow.Services;
 
 namespace WeekendWindow.Controllers
 {
@@ -26,10 +28,24 @@ namespace WeekendWindow.Controllers
         }
 
         // GET: Viewers
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index( )
         {
             WeatherForecast forecast = await _forecastRequest.GetWeatherForecast();
-            return View(forecast);
+            DateTime dt = DateTime.Today;
+            DayOfWeek dw = dt.DayOfWeek;
+
+            int num = (int)DateTime.Today.DayOfWeek;
+            int num2 = (int)dw;
+
+            DateTime satNum = DateTime.Today.AddDays(6 - num2);
+            DateTime sunNum = satNum.AddDays(1);
+
+            string sat = satNum.ToString("yyy-MM-dd", DateTimeFormatInfo.InvariantInfo);
+            string sun = sunNum.ToString("yyyy-MM-dd", DateTimeFormatInfo.InvariantInfo);
+
+            var data = forecast.data.Where(d => (d.valid_date == sat) || (d.valid_date == sun)).ToList();
+            
+            return View(data);
 
             //var applicationDbContext = _context.Viewers.Include(v => v.IdentityUser);
             //return View(await applicationDbContext.ToListAsync());

@@ -1,61 +1,55 @@
-﻿@model IEnumerable<WeekendWindow.Models.Viewer>
+﻿@model WeekendWindow.Models.WeatherForecast
 
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout-Viewers.cshtml";
 }
 
 <h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.IdentityUser)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HomeLocationId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NotificationDay)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdentityUser.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HomeLocationId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NotificationDay)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ViewerId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ViewerId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ViewerId">Delete</a>
-            </td>
-        </tr>
+<div>
+    <h4>WeatherForecast</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.city_name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.city_name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.state_code)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.state_code)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.lon)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.data[2].weather.description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.timezone)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.timezone)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.lat)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.lat)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.country_code)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.country_code)
+        </dd>
 
-}
-    </tbody>
-</table>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.WeatherForecastId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
