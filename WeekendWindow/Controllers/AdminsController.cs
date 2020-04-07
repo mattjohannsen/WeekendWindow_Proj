@@ -19,7 +19,7 @@ namespace WeekendWindow.Controllers
         public AdminsController(ApplicationDbContext context)
         {
             _context = context;
-            SendSms().Wait(); 
+            //SendSms1().Wait(); 
         }
 
         // GET: Admins
@@ -159,22 +159,22 @@ namespace WeekendWindow.Controllers
         {
             return _context.Admins.Any(e => e.AdminId == id);
         }
-        public static async Task SendSms()
-        {
-            // Find your Account Sid and Token at twilio.com/console
-            const string accountSid = "";
-            const string authToken = "";
+        //public static async Task SendSms1()
+        //{
+            
+        //    const string accountSid = "ACc0f1430439ef148f248ad7935e58ce62";
+        //    const string authToken = "9cb7125ea25ea4eececb6d2fcb925a28";
 
-            TwilioClient.Init(accountSid, authToken);
+        //    TwilioClient.Init(accountSid, authToken);
+           
+        //    var message = await MessageResource.CreateAsync(
+        //        body: "The weather will be great this weekend",
+        //        from: new Twilio.Types.PhoneNumber("+19135218316"),
+        //        to: new Twilio.Types.PhoneNumber("+13607204065")
+        //    );
 
-            var message = await MessageResource.CreateAsync(
-                body: "The weather will be great this weekend",
-                from: new Twilio.Types.PhoneNumber("+"),
-                to: new Twilio.Types.PhoneNumber("+")
-            );
-
-            Console.WriteLine(message.Sid);
-        }
+        //    Console.WriteLine(message.Sid);
+        //}
 
     }
 }

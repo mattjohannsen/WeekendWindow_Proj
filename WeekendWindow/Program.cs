@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using WeekendWindow.Controllers;
+
 
 namespace WeekendWindow
 {
@@ -19,6 +19,7 @@ namespace WeekendWindow
             CreateHostBuilder(args).Build().Run();
             Console.Write("Press any key to continue.");
             Console.ReadKey();
+            
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
