@@ -14,10 +14,6 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="IdentityUserId" class="control-label"></label>
-                <select asp-for="IdentityUserId" class="form-control" asp-items="ViewBag.IdentityUserId"></select>
-            </div>
-            <div class="form-group">
                 <label asp-for="FirstName" class="control-label"></label>
                 <input asp-for="FirstName" class="form-control" />
                 <span asp-validation-for="FirstName" class="text-danger"></span>
@@ -28,14 +24,9 @@
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="HomeLocationId" class="control-label"></label>
-                <input asp-for="HomeLocationId" class="form-control" />
-                <span asp-validation-for="HomeLocationId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NotificationDay" class="control-label"></label>
-                <input asp-for="NotificationDay" class="form-control" />
-                <span asp-validation-for="NotificationDay" class="text-danger"></span>
+                <select asp-for="NotificationDay" asp-items="Html.GetEnumSelectList<DayOfWeek>()" class="form-control">
+                    <option value="">Choose a day</option>
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="ViewerAddress" class="control-label"></label>
@@ -60,7 +51,7 @@
                 <label asp-for="ViewerLong" class="control-label"></label>
                 <input asp-for="ViewerLong" class="form-control" />
                 <span asp-validation-for="ViewerLong" class="text-danger"></span>
-            </div> 
+            </div>
             <div class="form-group">
                 <label asp-for="ViewerLat" class="control-label"></label>
                 <input asp-for="ViewerLat" class="form-control" />

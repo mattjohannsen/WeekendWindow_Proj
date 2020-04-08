@@ -20,10 +20,10 @@ namespace WeekendWindow.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
         public int? HomeLocationId { get; set; }
-        public string NotificationDay { get; set; } //testtest
+        public int NotificationDay { get; set; }
         public string ViewerAddress { get; set; }
         public string ViewerCity { get; set; }
-        public State ViewerState { get; set; }
+        public string ViewerState { get; set; }
         public string ViewerZip { get; set; }
         public string ViewerLong { get; set; }
         public string ViewerLat { get; set; }

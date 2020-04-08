@@ -14,11 +14,7 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ViewerId" />
-            <div class="form-group">
-                <label asp-for="IdentityUserId" class="control-label"></label>
-                <select asp-for="IdentityUserId" class="form-control" asp-items="ViewBag.IdentityUserId"></select>
-                <span asp-validation-for="IdentityUserId" class="text-danger"></span>
-            </div>
+            @Html.HiddenFor(model => model.IdentityUserId)
             <div class="form-group">
                 <label asp-for="FirstName" class="control-label"></label>
                 <input asp-for="FirstName" class="form-control" />
@@ -30,14 +26,9 @@
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="HomeLocationId" class="control-label"></label>
-                <input asp-for="HomeLocationId" class="form-control" />
-                <span asp-validation-for="HomeLocationId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NotificationDay" class="control-label"></label>
-                <input asp-for="NotificationDay" class="form-control" />
-                <span asp-validation-for="NotificationDay" class="text-danger"></span>
+                <select asp-for="NotificationDay" asp-items="Html.GetEnumSelectList<DayOfWeek>()" class="form-control">
+                    <option value="">Choose a day</option>
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="ViewerAddress" class="control-label"></label>
@@ -51,8 +42,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="ViewerState" class="control-label"></label>
-                <input asp-for="ViewerState" class="form-control" />
-                <span asp-validation-for="ViewerState" class="text-danger"></span>
+                <select asp-for="ViewerState" class="form-control" asp-items="ViewBag.States"></select>
             </div>
             <div class="form-group">
                 <label asp-for="ViewerZip" class="control-label"></label>

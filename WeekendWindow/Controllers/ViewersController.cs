@@ -99,7 +99,7 @@ namespace WeekendWindow.Controllers
         public IActionResult Create()
         {
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
-            ViewData["States"] = new SelectList(_context.State, "StateId", "StateName");
+            ViewData["States"] = new SelectList(_context.State, "StateAbbreviation", "StateName");
          
             return View();
         }
@@ -109,7 +109,7 @@ namespace WeekendWindow.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ViewerId,IdentityUserId,FirstName,LastName,HomeLocationId,NotificationDay")] Viewer viewer)
+        public async Task<IActionResult> Create([Bind("ViewerId,IdentityUserId,FirstName,LastName,HomeLocationId,NotificationDay, ViewerAddress, ViewerCity, ViewerState, ViewerZip, ViewerLong, ViewerLat")] Viewer viewer)
         {
             if (ModelState.IsValid)
             {
@@ -124,6 +124,7 @@ namespace WeekendWindow.Controllers
             return View(viewer);
         }
 
+       
         // GET: Viewers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -138,6 +139,7 @@ namespace WeekendWindow.Controllers
                 return NotFound();
             }
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", viewer.IdentityUserId);
+            ViewData["States"] = new SelectList(_context.State, "StateAbbreviation", "StateName");
             return View(viewer);
         }
 
@@ -146,7 +148,7 @@ namespace WeekendWindow.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ViewerId,IdentityUserId,FirstName,LastName,HomeLocationId,NotificationDay")] Viewer viewer)  
+        public async Task<IActionResult> Edit(int id, [Bind("ViewerId,IdentityUserId,FirstName,LastName,HomeLocationId,NotificationDay,ViewerAddress, ViewerCity, ViewerState, ViewerZip, ViewerLong, ViewerLat")] Viewer viewer)  
         {
             if (id != viewer.ViewerId)
             {
