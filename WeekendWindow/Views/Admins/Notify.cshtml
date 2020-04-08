@@ -1,0 +1,96 @@
+﻿@model IEnumerable<WeekendWindow.Models.Viewer>
+
+@{
+    ViewData["Title"] = "Notify";
+    Layout = "~/Views/Shared/_Layout-Admin.cshtml";
+}
+
+<h1>Notify</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdentityUser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HomeLocationId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NotificationDay)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ViewerAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ViewerCity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ViewerState)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ViewerZip)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ViewerLong)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ViewerLat)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdentityUser.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HomeLocationId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NotificationDay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ViewerAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ViewerCity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ViewerState)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ViewerZip)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ViewerLong)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ViewerLat)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ViewerId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ViewerId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ViewerId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

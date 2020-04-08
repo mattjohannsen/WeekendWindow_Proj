@@ -21,6 +21,13 @@ namespace WeekendWindow.Controllers
             _context = context;
         }
 
+        // NOTIFY: Viewers
+        public async Task<IActionResult> Notify()
+        {
+            var applicationDbContext = _context.Admins.Include(a => a.IdentityUser);
+            return View(await applicationDbContext.ToListAsync());
+        }
+
         // GET: Admins
         public async Task<IActionResult> Index()
         {

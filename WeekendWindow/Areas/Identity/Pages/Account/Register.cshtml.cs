@@ -66,6 +66,10 @@ namespace WeekendWindow.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
+            [Required]
+            [DataType(DataType.PhoneNumber)]
+            [Display(Name = "PhoneNumber")]
+            public string PhoneNumber { get; set; }
 
             [Required] 
             public string Role { get; set; }
@@ -87,7 +91,7 @@ namespace WeekendWindow.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
+                var user = new IdentityUser { UserName = Input.Email, Email = Input.Email, PhoneNumber = Input.PhoneNumber };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
