@@ -10,8 +10,8 @@ using WeekendWindow.Data;
 namespace WeekendWindow.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200408160044_AddedViewerAddressFields")]
-    partial class AddedViewerAddressFields
+    [Migration("20200408174558_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,15 +50,15 @@ namespace WeekendWindow.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b4b88c82-48c5-42a2-a431-b44cac067703",
-                            ConcurrencyStamp = "844ba25d-9c7d-4727-9545-464d22d9f4a3",
+                            Id = "abb6a638-e24d-4e11-ae46-9e2a1b89ab60",
+                            ConcurrencyStamp = "76481c60-3615-4df3-a8ef-433c6339dfba",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "4e866984-432b-4d58-b4d8-ee0ce12d7f1e",
-                            ConcurrencyStamp = "70202937-7c13-4232-965b-84ff14af59c5",
+                            Id = "0a45809b-3ab2-4721-a1da-7d98d6059336",
+                            ConcurrencyStamp = "4b88af40-b6f5-4fa8-b89a-2499a2488d82",
                             Name = "Viewer",
                             NormalizedName = "VIEWER"
                         });
@@ -1798,8 +1798,8 @@ namespace WeekendWindow.Migrations
                     b.Property<string>("ViewerLong")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ViewerState")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("ViewerStateStateId")
+                        .HasColumnType("int");
 
                     b.Property<string>("ViewerZip")
                         .HasColumnType("nvarchar(max)");
@@ -1807,6 +1807,8 @@ namespace WeekendWindow.Migrations
                     b.HasKey("ViewerId");
 
                     b.HasIndex("IdentityUserId");
+
+                    b.HasIndex("ViewerStateStateId");
 
                     b.ToTable("Viewers");
                 });
@@ -2053,6 +2055,10 @@ namespace WeekendWindow.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
                         .WithMany()
                         .HasForeignKey("IdentityUserId");
+
+                    b.HasOne("WeekendWindow.Models.State", "ViewerState")
+                        .WithMany()
+                        .HasForeignKey("ViewerStateStateId");
                 });
 
             modelBuilder.Entity("WeekendWindow.Models.ViewerLocation", b =>

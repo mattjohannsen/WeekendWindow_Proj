@@ -11,6 +11,7 @@ using WeekendWindow.Contracts;
 using WeekendWindow.Data;
 using WeekendWindow.Models;
 using WeekendWindow.Services;
+using WeekendWindow.ViewModels;
 
 namespace WeekendWindow.Controllers
 {
@@ -98,6 +99,8 @@ namespace WeekendWindow.Controllers
         public IActionResult Create()
         {
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
+            ViewData["States"] = new SelectList(_context.State, "StateId", "StateName");
+         
             return View();
         }
 
@@ -117,6 +120,7 @@ namespace WeekendWindow.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", viewer.IdentityUserId);
+
             return View(viewer);
         }
 
@@ -142,7 +146,7 @@ namespace WeekendWindow.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ViewerId,IdentityUserId,FirstName,LastName,HomeLocationId,NotificationDay")] Viewer viewer)
+        public async Task<IActionResult> Edit(int id, [Bind("ViewerId,IdentityUserId,FirstName,LastName,HomeLocationId,NotificationDay")] Viewer viewer)  
         {
             if (id != viewer.ViewerId)
             {

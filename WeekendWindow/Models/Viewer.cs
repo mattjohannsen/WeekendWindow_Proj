@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -22,7 +23,7 @@ namespace WeekendWindow.Models
         public string NotificationDay { get; set; } //testtest
         public string ViewerAddress { get; set; }
         public string ViewerCity { get; set; }
-        public string ViewerState { get; set; }
+        public State ViewerState { get; set; }
         public string ViewerZip { get; set; }
         public string ViewerLong { get; set; }
         public string ViewerLat { get; set; }
