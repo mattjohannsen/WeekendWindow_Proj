@@ -75,6 +75,89 @@ namespace WeekendWindow.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Location",
+                columns: table => new
+                {
+                    LocationId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    lat = table.Column<float>(nullable: false),
+                    lng = table.Column<float>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Location", x => x.LocationId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "NearbyPlaces",
+                columns: table => new
+                {
+                    NearbyPlacesId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    next_page_token = table.Column<string>(nullable: true),
+                    status = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NearbyPlaces", x => x.NearbyPlacesId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Northeast",
+                columns: table => new
+                {
+                    NortheastId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    lat = table.Column<float>(nullable: false),
+                    lng = table.Column<float>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Northeast", x => x.NortheastId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Opening_Hours",
+                columns: table => new
+                {
+                    Opening_HoursId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    open_now = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Opening_Hours", x => x.Opening_HoursId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Plus_Code",
+                columns: table => new
+                {
+                    Plus_CodeId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    compound_code = table.Column<string>(nullable: true),
+                    global_code = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Plus_Code", x => x.Plus_CodeId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Southwest",
+                columns: table => new
+                {
+                    SouthwestId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    lat = table.Column<float>(nullable: false),
+                    lng = table.Column<float>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Southwest", x => x.SouthwestId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "State",
                 columns: table => new
                 {
@@ -100,6 +183,39 @@ namespace WeekendWindow.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TravelRadius", x => x.TravelRadiusId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Weather",
+                columns: table => new
+                {
+                    WeatherId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    icon = table.Column<string>(nullable: true),
+                    code = table.Column<int>(nullable: false),
+                    description = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Weather", x => x.WeatherId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "WeatherForecast",
+                columns: table => new
+                {
+                    WeatherForecastId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    city_name = table.Column<string>(nullable: true),
+                    lon = table.Column<string>(nullable: true),
+                    timezone = table.Column<string>(nullable: true),
+                    lat = table.Column<string>(nullable: true),
+                    country_code = table.Column<string>(nullable: true),
+                    state_code = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WeatherForecast", x => x.WeatherForecastId);
                 });
 
             migrationBuilder.CreateTable(
@@ -279,6 +395,94 @@ namespace WeekendWindow.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Viewport",
+                columns: table => new
+                {
+                    ViewPortId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NortheastId = table.Column<int>(nullable: true),
+                    SouthwestId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Viewport", x => x.ViewPortId);
+                    table.ForeignKey(
+                        name: "FK_Viewport_Northeast_NortheastId",
+                        column: x => x.NortheastId,
+                        principalTable: "Northeast",
+                        principalColumn: "NortheastId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Viewport_Southwest_SouthwestId",
+                        column: x => x.SouthwestId,
+                        principalTable: "Southwest",
+                        principalColumn: "SouthwestId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Datum",
+                columns: table => new
+                {
+                    DatumId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    moonrise_ts = table.Column<int>(nullable: false),
+                    wind_cdir = table.Column<string>(nullable: true),
+                    rh = table.Column<int>(nullable: false),
+                    pres = table.Column<float>(nullable: false),
+                    high_temp = table.Column<float>(nullable: false),
+                    sunset_ts = table.Column<int>(nullable: false),
+                    ozone = table.Column<float>(nullable: false),
+                    moon_phase = table.Column<float>(nullable: false),
+                    wind_gust_spd = table.Column<float>(nullable: false),
+                    snow_depth = table.Column<float>(nullable: false),
+                    clouds = table.Column<int>(nullable: false),
+                    ts = table.Column<int>(nullable: false),
+                    sunrise_ts = table.Column<int>(nullable: false),
+                    app_min_temp = table.Column<float>(nullable: false),
+                    wind_spd = table.Column<float>(nullable: false),
+                    pop = table.Column<int>(nullable: false),
+                    wind_cdir_full = table.Column<string>(nullable: true),
+                    slp = table.Column<float>(nullable: false),
+                    moon_phase_lunation = table.Column<float>(nullable: false),
+                    valid_date = table.Column<string>(nullable: true),
+                    app_max_temp = table.Column<float>(nullable: false),
+                    vis = table.Column<float>(nullable: false),
+                    dewpt = table.Column<float>(nullable: false),
+                    snow = table.Column<float>(nullable: false),
+                    uv = table.Column<float>(nullable: false),
+                    WeatherId = table.Column<int>(nullable: true),
+                    wind_dir = table.Column<int>(nullable: false),
+                    clouds_hi = table.Column<int>(nullable: false),
+                    precip = table.Column<float>(nullable: false),
+                    low_temp = table.Column<float>(nullable: false),
+                    max_temp = table.Column<float>(nullable: false),
+                    moonset_ts = table.Column<int>(nullable: false),
+                    datetime = table.Column<string>(nullable: true),
+                    temp = table.Column<float>(nullable: false),
+                    min_temp = table.Column<float>(nullable: false),
+                    clouds_mid = table.Column<int>(nullable: false),
+                    clouds_low = table.Column<int>(nullable: false),
+                    WeatherForecastId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Datum", x => x.DatumId);
+                    table.ForeignKey(
+                        name: "FK_Datum_WeatherForecast_WeatherForecastId",
+                        column: x => x.WeatherForecastId,
+                        principalTable: "WeatherForecast",
+                        principalColumn: "WeatherForecastId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Datum_Weather_WeatherId",
+                        column: x => x.WeatherId,
+                        principalTable: "Weather",
+                        principalColumn: "WeatherId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ViewerLocation",
                 columns: table => new
                 {
@@ -311,13 +515,109 @@ namespace WeekendWindow.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Geometry",
+                columns: table => new
+                {
+                    GeometryId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    LocationId = table.Column<int>(nullable: true),
+                    ViewPortId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Geometry", x => x.GeometryId);
+                    table.ForeignKey(
+                        name: "FK_Geometry_Location_LocationId",
+                        column: x => x.LocationId,
+                        principalTable: "Location",
+                        principalColumn: "LocationId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Geometry_Viewport_ViewPortId",
+                        column: x => x.ViewPortId,
+                        principalTable: "Viewport",
+                        principalColumn: "ViewPortId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Result",
+                columns: table => new
+                {
+                    id = table.Column<string>(nullable: false),
+                    GeometryId = table.Column<int>(nullable: true),
+                    icon = table.Column<string>(nullable: true),
+                    name = table.Column<string>(nullable: true),
+                    place_id = table.Column<string>(nullable: true),
+                    Plus_CodeId = table.Column<int>(nullable: true),
+                    price_level = table.Column<int>(nullable: false),
+                    rating = table.Column<float>(nullable: false),
+                    reference = table.Column<string>(nullable: true),
+                    scope = table.Column<string>(nullable: true),
+                    user_ratings_total = table.Column<int>(nullable: false),
+                    vicinity = table.Column<string>(nullable: true),
+                    Opening_HoursId = table.Column<int>(nullable: true),
+                    NearbyPlacesId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Result", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_Result_Geometry_GeometryId",
+                        column: x => x.GeometryId,
+                        principalTable: "Geometry",
+                        principalColumn: "GeometryId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Result_NearbyPlaces_NearbyPlacesId",
+                        column: x => x.NearbyPlacesId,
+                        principalTable: "NearbyPlaces",
+                        principalColumn: "NearbyPlacesId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Result_Opening_Hours_Opening_HoursId",
+                        column: x => x.Opening_HoursId,
+                        principalTable: "Opening_Hours",
+                        principalColumn: "Opening_HoursId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Result_Plus_Code_Plus_CodeId",
+                        column: x => x.Plus_CodeId,
+                        principalTable: "Plus_Code",
+                        principalColumn: "Plus_CodeId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Photo",
+                columns: table => new
+                {
+                    PhotoId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    height = table.Column<int>(nullable: false),
+                    photo_reference = table.Column<string>(nullable: true),
+                    width = table.Column<int>(nullable: false),
+                    Resultid = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Photo", x => x.PhotoId);
+                    table.ForeignKey(
+                        name: "FK_Photo_Result_Resultid",
+                        column: x => x.Resultid,
+                        principalTable: "Result",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "4b473a3f-e7a4-4767-b991-3d55f51280ca", "d13a8e66-5969-4363-ba68-f2560ead3ebb", "Admin", "ADMIN" },
-                    { "40a878a7-da48-474a-bc93-c1614400b640", "1a29ab01-1748-41a5-9011-02e67d266640", "Viewer", "VIEWER" }
+                    { "05883021-ba71-4973-a80b-d0af7a6b589d", "d0834130-e3b9-454b-a4c6-2f589a582883", "Admin", "ADMIN" },
+                    { "77b8471d-5396-42aa-a9a5-c91b8c766c67", "b60f839d-c78b-4d90-a4ae-a3dc688955e0", "Viewer", "VIEWER" }
                 });
 
             migrationBuilder.InsertData(
@@ -568,6 +868,26 @@ namespace WeekendWindow.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Datum_WeatherForecastId",
+                table: "Datum",
+                column: "WeatherForecastId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Datum_WeatherId",
+                table: "Datum",
+                column: "WeatherId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Geometry_LocationId",
+                table: "Geometry",
+                column: "LocationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Geometry_ViewPortId",
+                table: "Geometry",
+                column: "ViewPortId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_GooglePlacesAttitude_GPAAttitudeId",
                 table: "GooglePlacesAttitude",
                 column: "GPAAttitudeId");
@@ -576,6 +896,31 @@ namespace WeekendWindow.Migrations
                 name: "IX_GooglePlacesAttitude_GPAGooglePlacesId",
                 table: "GooglePlacesAttitude",
                 column: "GPAGooglePlacesId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Photo_Resultid",
+                table: "Photo",
+                column: "Resultid");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Result_GeometryId",
+                table: "Result",
+                column: "GeometryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Result_NearbyPlacesId",
+                table: "Result",
+                column: "NearbyPlacesId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Result_Opening_HoursId",
+                table: "Result",
+                column: "Opening_HoursId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Result_Plus_CodeId",
+                table: "Result",
+                column: "Plus_CodeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ViewerLocation_ViewerLocationStateId",
@@ -591,6 +936,16 @@ namespace WeekendWindow.Migrations
                 name: "IX_Viewers_IdentityUserId",
                 table: "Viewers",
                 column: "IdentityUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Viewport_NortheastId",
+                table: "Viewport",
+                column: "NortheastId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Viewport_SouthwestId",
+                table: "Viewport",
+                column: "SouthwestId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -614,7 +969,13 @@ namespace WeekendWindow.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Datum");
+
+            migrationBuilder.DropTable(
                 name: "GooglePlacesAttitude");
+
+            migrationBuilder.DropTable(
+                name: "Photo");
 
             migrationBuilder.DropTable(
                 name: "TravelRadius");
@@ -626,10 +987,19 @@ namespace WeekendWindow.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "WeatherForecast");
+
+            migrationBuilder.DropTable(
+                name: "Weather");
+
+            migrationBuilder.DropTable(
                 name: "Attitude");
 
             migrationBuilder.DropTable(
                 name: "GooglePlaces");
+
+            migrationBuilder.DropTable(
+                name: "Result");
 
             migrationBuilder.DropTable(
                 name: "State");
@@ -638,7 +1008,31 @@ namespace WeekendWindow.Migrations
                 name: "Viewers");
 
             migrationBuilder.DropTable(
+                name: "Geometry");
+
+            migrationBuilder.DropTable(
+                name: "NearbyPlaces");
+
+            migrationBuilder.DropTable(
+                name: "Opening_Hours");
+
+            migrationBuilder.DropTable(
+                name: "Plus_Code");
+
+            migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Location");
+
+            migrationBuilder.DropTable(
+                name: "Viewport");
+
+            migrationBuilder.DropTable(
+                name: "Northeast");
+
+            migrationBuilder.DropTable(
+                name: "Southwest");
         }
     }
 }

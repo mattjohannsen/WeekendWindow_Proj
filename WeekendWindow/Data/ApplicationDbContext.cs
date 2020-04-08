@@ -15,12 +15,12 @@ namespace WeekendWindow.Data
         {
         }
 
-		protected override void OnModelCreating(ModelBuilder builder)
-		{
-			base.OnModelCreating(builder);
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
 
-			builder.Entity<IdentityRole>()
-				.HasData(
+            builder.Entity<IdentityRole>()
+                .HasData(
                     new IdentityRole
                     {
                         Name = "Admin",
@@ -98,7 +98,7 @@ namespace WeekendWindow.Data
                 );
             builder.Entity<TravelRadius>()
                 .HasData(
-                    new TravelRadius { TravelRadiusId = 1, RadiusMiles = 1, RadiumMeters = 1600},
+                    new TravelRadius { TravelRadiusId = 1, RadiusMiles = 1, RadiumMeters = 1600 },
                     new TravelRadius { TravelRadiusId = 2, RadiusMiles = 5, RadiumMeters = 8000 },
                     new TravelRadius { TravelRadiusId = 3, RadiusMiles = 10, RadiumMeters = 16000 },
                     new TravelRadius { TravelRadiusId = 4, RadiusMiles = 30, RadiumMeters = 50000 }
