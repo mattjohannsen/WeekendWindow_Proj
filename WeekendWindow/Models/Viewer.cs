@@ -20,6 +20,7 @@ namespace WeekendWindow.Models
         public string LastName { get; set; }
         public int? HomeLocationId { get; set; }
         [ForeignKey("NotificationDay")]
+        [Display (Name = "NotificationDay")]
         public string NotificationDay { get; set; }
 
     }

@@ -20,40 +20,38 @@ namespace WeekendWindow.Controllers
         public AdminsController(ApplicationDbContext context)
         {
             _context = context;
-            SendSms1().Wait(); 
+            CreateSMS();
+            //SendSms1().Wait(); 
             //ViewersController.CreateNotification();
         }
 
-        // GET: Admins
-        // GET: Admins
-        //public async Task<IActionResult> Index()
+        //public async Task<IActionResult> Index(string dayToNotify = null)
         //{
         //    var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-        //    Admin currentAdmin = _context.Admins.Where(a => a.IdentityUserId == userId).FirstOrDefault();
-        //    //var applicationDbContext = _context.Admins.Include(a => a.IdentityUser);
-        //    var currentDay = DateTime.Now.DayOfWeek.ToString();
-        //    var viewerslist = _context.Viewers.Where(v => v.NotificationDay == currentDay).ToList();
-        //    currentAdmin.ViewersToNotify = viewerslist;
+        //    Admin currentadmin = _context.Admins.Where(e => e.IdentityUserId == userId).FirstOrDefault();
+        //    string dayToCheck = DateTime.Now.DayOfWeek.ToString();
+        //    string dateToCheck = DateTime.Now.ToShortDateString();
+        //    DateTime? DTdateToCheck = DateTime.Parse(dateToCheck);
+        //    if (dayToNotify != null)
+        //    {
+        //        dayToCheck = dayToNotify;
+        //    }
+        //    var notifyList = _context.Viewers.Where(c => c.NotificationDay == dateToCheck).ToList();
 
+        //    currentadmin.ViewersToNotify = notifyList;
 
+        //    var notifyByDay = new List<DayOfWeek>();
+        //    notifyByDay.Add(DayOfWeek.Monday);
+        //    notifyByDay.Add(DayOfWeek.Tuesday);
+        //    notifyByDay.Add(DayOfWeek.Wednesday);
+        //    notifyByDay.Add(DayOfWeek.Thursday);
+        //    notifyByDay.Add(DayOfWeek.Friday);
+        //    notifyByDay.Add(DayOfWeek.Saturday);
+        //    notifyByDay.Add(DayOfWeek.Sunday);
+        //    //currentadmin.workDays = notifyByDay;
 
-
-        //    return View(currentAdmin);
-        //    //return View(await applicationDbContext.ToListAsync());
+        //    return View(currentadmin);
         //}
-
-        public async Task<IActionResult> CreateSMS()
-        {
-
-            var currentDay = DateTime.Now.DayOfWeek.ToString();
-            var viewersList = _context.Viewers.Where(v => v.NotificationDay == currentDay).ToList();
-            Admin admin = new Admin();
-            admin.ViewersToNotify = viewersList;
-
-            
-
-            return View(viewersList);
-        }
 
         public async Task<IActionResult> Index()
         {
@@ -190,6 +188,30 @@ namespace WeekendWindow.Controllers
         private bool AdminExists(int id)
         {
             return _context.Admins.Any(e => e.AdminId == id);
+        }
+
+        public IActionResult CreateSMS()
+        {
+
+            var currentDay = DateTime.Now.DayOfWeek.ToString();
+            
+          
+            var viewersList = _context.Viewers.Where(v => v.NotificationDay == currentDay).ToList();
+            //Admin admin = new Admin();
+            //admin.ViewersToNotify = viewersList;now 
+            //var routesByDay = new List<DayOfWeek>();
+            //routesByDay.Add(DayOfWeek.Monday);
+            //routesByDay.Add(DayOfWeek.Tuesday);
+            //routesByDay.Add(DayOfWeek.Wednesday);
+            //routesByDay.Add(DayOfWeek.Thursday);
+            //routesByDay.Add(DayOfWeek.Friday);
+            //routesByDay.Add(DayOfWeek.Saturday);
+            //routesByDay.Add(DayOfWeek.Sunday);
+            //currentemployee.workDays = routesByDay;
+
+
+            //SendSms1();
+            return View(viewersList);
         }
         public static async Task SendSms1()
         {
