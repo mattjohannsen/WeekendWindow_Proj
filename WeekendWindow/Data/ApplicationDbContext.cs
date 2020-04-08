@@ -213,7 +213,14 @@ namespace WeekendWindow.Data
                     new GooglePlacesAttitude { GooglePlacesAttitudeId = 82, GPAGooglePlacesId = 1, GPAAttitudeId = 3 },
                     new GooglePlacesAttitude { GooglePlacesAttitudeId = 83, GPAGooglePlacesId = 1, GPAAttitudeId = 4 },
                     new GooglePlacesAttitude { GooglePlacesAttitudeId = 84, GPAGooglePlacesId = 1, GPAAttitudeId = 5 },
-                    new GooglePlacesAttitude { GooglePlacesAttitudeId = 85, GPAGooglePlacesId = 1, GPAAttitudeId = 7 }
+                    new GooglePlacesAttitude { GooglePlacesAttitudeId = 85, GPAGooglePlacesId = 1, GPAAttitudeId = 7 },
+                    new GooglePlacesAttitude { GooglePlacesAttitudeId = 86, GPAGooglePlacesId = 11, GPAAttitudeId = 1 },
+                    new GooglePlacesAttitude { GooglePlacesAttitudeId = 87, GPAGooglePlacesId = 11, GPAAttitudeId = 2 },
+                    new GooglePlacesAttitude { GooglePlacesAttitudeId = 88, GPAGooglePlacesId = 11, GPAAttitudeId = 3 },
+                    new GooglePlacesAttitude { GooglePlacesAttitudeId = 89, GPAGooglePlacesId = 11, GPAAttitudeId = 4 },
+                    new GooglePlacesAttitude { GooglePlacesAttitudeId = 90, GPAGooglePlacesId = 11, GPAAttitudeId = 5 },
+                    new GooglePlacesAttitude { GooglePlacesAttitudeId = 91, GPAGooglePlacesId = 11, GPAAttitudeId = 6 },
+                    new GooglePlacesAttitude { GooglePlacesAttitudeId = 92, GPAGooglePlacesId = 11, GPAAttitudeId = 7 }
                 );
         }
         public DbSet<Models.Viewer> Viewers { get; set; }

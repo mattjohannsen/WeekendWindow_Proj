@@ -10,7 +10,7 @@ using WeekendWindow.Data;
 namespace WeekendWindow.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200408015802_Initial")]
+    [Migration("20200408125123_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,15 +50,15 @@ namespace WeekendWindow.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "05883021-ba71-4973-a80b-d0af7a6b589d",
-                            ConcurrencyStamp = "d0834130-e3b9-454b-a4c6-2f589a582883",
+                            Id = "d8690682-6f01-47ae-8711-da565c6fabab",
+                            ConcurrencyStamp = "7ab745b5-7342-4c99-913a-cf35abb1725b",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "77b8471d-5396-42aa-a9a5-c91b8c766c67",
-                            ConcurrencyStamp = "b60f839d-c78b-4d90-a4ae-a3dc688955e0",
+                            Id = "51a05d4c-76c9-4c7c-aa12-13c4c9fcaff3",
+                            ConcurrencyStamp = "e7842ba2-2d07-4020-ade7-23a906359c91",
                             Name = "Viewer",
                             NormalizedName = "VIEWER"
                         });
@@ -1161,6 +1161,48 @@ namespace WeekendWindow.Migrations
                             GooglePlacesAttitudeId = 85,
                             GPAAttitudeId = 7,
                             GPAGooglePlacesId = 1
+                        },
+                        new
+                        {
+                            GooglePlacesAttitudeId = 86,
+                            GPAAttitudeId = 1,
+                            GPAGooglePlacesId = 11
+                        },
+                        new
+                        {
+                            GooglePlacesAttitudeId = 87,
+                            GPAAttitudeId = 2,
+                            GPAGooglePlacesId = 11
+                        },
+                        new
+                        {
+                            GooglePlacesAttitudeId = 88,
+                            GPAAttitudeId = 3,
+                            GPAGooglePlacesId = 11
+                        },
+                        new
+                        {
+                            GooglePlacesAttitudeId = 89,
+                            GPAAttitudeId = 4,
+                            GPAGooglePlacesId = 11
+                        },
+                        new
+                        {
+                            GooglePlacesAttitudeId = 90,
+                            GPAAttitudeId = 5,
+                            GPAGooglePlacesId = 11
+                        },
+                        new
+                        {
+                            GooglePlacesAttitudeId = 91,
+                            GPAAttitudeId = 6,
+                            GPAGooglePlacesId = 11
+                        },
+                        new
+                        {
+                            GooglePlacesAttitudeId = 92,
+                            GPAAttitudeId = 7,
+                            GPAGooglePlacesId = 11
                         });
                 });
 
