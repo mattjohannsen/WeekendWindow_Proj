@@ -10,8 +10,8 @@ using WeekendWindow.Data;
 namespace WeekendWindow.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200408131503_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20200408160044_AddedViewerAddressFields")]
+    partial class AddedViewerAddressFields
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,15 +50,15 @@ namespace WeekendWindow.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "fbe9f59e-cd1e-44ca-bbdc-62593aa7e7a1",
-                            ConcurrencyStamp = "46de6565-3961-48f7-8960-49c983c403c1",
+                            Id = "b4b88c82-48c5-42a2-a431-b44cac067703",
+                            ConcurrencyStamp = "844ba25d-9c7d-4727-9545-464d22d9f4a3",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "fda13e48-cae2-4b53-b11c-e7bd66fb3193",
-                            ConcurrencyStamp = "f6ebb67c-83c9-4046-bf1c-a64009917bbf",
+                            Id = "4e866984-432b-4d58-b4d8-ee0ce12d7f1e",
+                            ConcurrencyStamp = "70202937-7c13-4232-965b-84ff14af59c5",
                             Name = "Viewer",
                             NormalizedName = "VIEWER"
                         });
@@ -1784,6 +1784,24 @@ namespace WeekendWindow.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NotificationDay")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ViewerAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ViewerCity")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ViewerLat")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ViewerLong")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ViewerState")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ViewerZip")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ViewerId");

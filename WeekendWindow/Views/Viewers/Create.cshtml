@@ -14,6 +14,10 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                <label asp-for="IdentityUserId" class="control-label"></label>
+                <select asp-for="IdentityUserId" class ="form-control" asp-items="ViewBag.IdentityUserId"></select>
+            </div>
+            <div class="form-group">
                 <label asp-for="FirstName" class="control-label"></label>
                 <input asp-for="FirstName" class="form-control" />
                 <span asp-validation-for="FirstName" class="text-danger"></span>
@@ -29,9 +33,39 @@
                 <span asp-validation-for="HomeLocationId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <select asp-for="NotificationDay" asp-items="Html.GetEnumSelectList<DayOfWeek>()" class="form-control" >
-                    <option value="">Choose a day</option>
-                </select>
+                <label asp-for="NotificationDay" class="control-label"></label>
+                <input asp-for="NotificationDay" class="form-control" />
+                <span asp-validation-for="NotificationDay" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ViewerAddress" class="control-label"></label>
+                <input asp-for="ViewerAddress" class="form-control" />
+                <span asp-validation-for="ViewerAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ViewerCity" class="control-label"></label>
+                <input asp-for="ViewerCity" class="form-control" />
+                <span asp-validation-for="ViewerCity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ViewerState" class="control-label"></label>
+                <input asp-for="ViewerState" class="form-control" />
+                <span asp-validation-for="ViewerState" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ViewerZip" class="control-label"></label>
+                <input asp-for="ViewerZip" class="form-control" />
+                <span asp-validation-for="ViewerZip" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ViewerLong" class="control-label"></label>
+                <input asp-for="ViewerLong" class="form-control" />
+                <span asp-validation-for="ViewerLong" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ViewerLat" class="control-label"></label>
+                <input asp-for="ViewerLat" class="form-control" />
+                <span asp-validation-for="ViewerLat" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
