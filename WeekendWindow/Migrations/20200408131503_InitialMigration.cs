@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WeekendWindow.Migrations
 {
-    public partial class Initial : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -616,8 +616,8 @@ namespace WeekendWindow.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "d8690682-6f01-47ae-8711-da565c6fabab", "7ab745b5-7342-4c99-913a-cf35abb1725b", "Admin", "ADMIN" },
-                    { "51a05d4c-76c9-4c7c-aa12-13c4c9fcaff3", "e7842ba2-2d07-4020-ade7-23a906359c91", "Viewer", "VIEWER" }
+                    { "fbe9f59e-cd1e-44ca-bbdc-62593aa7e7a1", "46de6565-3961-48f7-8960-49c983c403c1", "Admin", "ADMIN" },
+                    { "fda13e48-cae2-4b53-b11c-e7bd66fb3193", "f6ebb67c-83c9-4046-bf1c-a64009917bbf", "Viewer", "VIEWER" }
                 });
 
             migrationBuilder.InsertData(
