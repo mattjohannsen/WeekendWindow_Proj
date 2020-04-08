@@ -15,12 +15,12 @@ namespace WeekendWindow.Data
         {
         }
 
-		protected override void OnModelCreating(ModelBuilder builder)
-		{
-			base.OnModelCreating(builder);
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
 
-			builder.Entity<IdentityRole>()
-				.HasData(
+            builder.Entity<IdentityRole>()
+                .HasData(
                     new IdentityRole
                     {
                         Name = "Admin",
@@ -98,7 +98,7 @@ namespace WeekendWindow.Data
                 );
             builder.Entity<TravelRadius>()
                 .HasData(
-                    new TravelRadius { TravelRadiusId = 1, RadiusMiles = 1, RadiumMeters = 1600},
+                    new TravelRadius { TravelRadiusId = 1, RadiusMiles = 1, RadiumMeters = 1600 },
                     new TravelRadius { TravelRadiusId = 2, RadiusMiles = 5, RadiumMeters = 8000 },
                     new TravelRadius { TravelRadiusId = 3, RadiusMiles = 10, RadiumMeters = 16000 },
                     new TravelRadius { TravelRadiusId = 4, RadiusMiles = 30, RadiumMeters = 50000 }
@@ -219,15 +219,13 @@ namespace WeekendWindow.Data
         public DbSet<Models.Viewer> Viewers { get; set; }
         public DbSet<Models.ViewerLocation> ViewerLocation { get; set; }
         public DbSet<Models.Admin> Admins { get; set; }
-<<<<<<< HEAD
         public DbSet<Models.State> State { get; set; }
         public DbSet<Models.Attitude> Attitude { get; set; }
         public DbSet<Models.TravelRadius> TravelRadius { get; set; }
         public DbSet<Models.GooglePlaces> GooglePlaces { get; set; }
         public DbSet<Models.GooglePlacesAttitude> GooglePlacesAttitude { get; set; }
         public DbSet<WeekendWindow.Models.NearbyPlaces> NearbyPlaces { get; set; }
-=======
         public DbSet<WeekendWindow.Models.WeatherForecast> WeatherForecast { get; set; }
->>>>>>> 0623d057d8c0dae3d0530b0d3760c97a7f0648f6
+
     }
 }

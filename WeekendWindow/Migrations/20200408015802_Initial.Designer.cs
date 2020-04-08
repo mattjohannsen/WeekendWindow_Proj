@@ -10,7 +10,7 @@ using WeekendWindow.Data;
 namespace WeekendWindow.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200407160123_Initial")]
+    [Migration("20200408015802_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,15 +50,15 @@ namespace WeekendWindow.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "4b473a3f-e7a4-4767-b991-3d55f51280ca",
-                            ConcurrencyStamp = "d13a8e66-5969-4363-ba68-f2560ead3ebb",
+                            Id = "05883021-ba71-4973-a80b-d0af7a6b589d",
+                            ConcurrencyStamp = "d0834130-e3b9-454b-a4c6-2f589a582883",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "40a878a7-da48-474a-bc93-c1614400b640",
-                            ConcurrencyStamp = "1a29ab01-1748-41a5-9011-02e67d266640",
+                            Id = "77b8471d-5396-42aa-a9a5-c91b8c766c67",
+                            ConcurrencyStamp = "b60f839d-c78b-4d90-a4ae-a3dc688955e0",
                             Name = "Viewer",
                             NormalizedName = "VIEWER"
                         });
@@ -306,6 +306,158 @@ namespace WeekendWindow.Migrations
                             AttitudeId = 7,
                             AttitudeName = "Relax"
                         });
+                });
+
+            modelBuilder.Entity("WeekendWindow.Models.Datum", b =>
+                {
+                    b.Property<int>("DatumId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("WeatherForecastId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("WeatherId")
+                        .HasColumnType("int");
+
+                    b.Property<float>("app_max_temp")
+                        .HasColumnType("real");
+
+                    b.Property<float>("app_min_temp")
+                        .HasColumnType("real");
+
+                    b.Property<int>("clouds")
+                        .HasColumnType("int");
+
+                    b.Property<int>("clouds_hi")
+                        .HasColumnType("int");
+
+                    b.Property<int>("clouds_low")
+                        .HasColumnType("int");
+
+                    b.Property<int>("clouds_mid")
+                        .HasColumnType("int");
+
+                    b.Property<string>("datetime")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("dewpt")
+                        .HasColumnType("real");
+
+                    b.Property<float>("high_temp")
+                        .HasColumnType("real");
+
+                    b.Property<float>("low_temp")
+                        .HasColumnType("real");
+
+                    b.Property<float>("max_temp")
+                        .HasColumnType("real");
+
+                    b.Property<float>("min_temp")
+                        .HasColumnType("real");
+
+                    b.Property<float>("moon_phase")
+                        .HasColumnType("real");
+
+                    b.Property<float>("moon_phase_lunation")
+                        .HasColumnType("real");
+
+                    b.Property<int>("moonrise_ts")
+                        .HasColumnType("int");
+
+                    b.Property<int>("moonset_ts")
+                        .HasColumnType("int");
+
+                    b.Property<float>("ozone")
+                        .HasColumnType("real");
+
+                    b.Property<int>("pop")
+                        .HasColumnType("int");
+
+                    b.Property<float>("precip")
+                        .HasColumnType("real");
+
+                    b.Property<float>("pres")
+                        .HasColumnType("real");
+
+                    b.Property<int>("rh")
+                        .HasColumnType("int");
+
+                    b.Property<float>("slp")
+                        .HasColumnType("real");
+
+                    b.Property<float>("snow")
+                        .HasColumnType("real");
+
+                    b.Property<float>("snow_depth")
+                        .HasColumnType("real");
+
+                    b.Property<int>("sunrise_ts")
+                        .HasColumnType("int");
+
+                    b.Property<int>("sunset_ts")
+                        .HasColumnType("int");
+
+                    b.Property<float>("temp")
+                        .HasColumnType("real");
+
+                    b.Property<int>("ts")
+                        .HasColumnType("int");
+
+                    b.Property<float>("uv")
+                        .HasColumnType("real");
+
+                    b.Property<string>("valid_date")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("vis")
+                        .HasColumnType("real");
+
+                    b.Property<string>("wind_cdir")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("wind_cdir_full")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("wind_dir")
+                        .HasColumnType("int");
+
+                    b.Property<float>("wind_gust_spd")
+                        .HasColumnType("real");
+
+                    b.Property<float>("wind_spd")
+                        .HasColumnType("real");
+
+                    b.HasKey("DatumId");
+
+                    b.HasIndex("WeatherForecastId");
+
+                    b.HasIndex("WeatherId");
+
+                    b.ToTable("Datum");
+                });
+
+            modelBuilder.Entity("WeekendWindow.Models.Geometry", b =>
+                {
+                    b.Property<int>("GeometryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("LocationId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ViewPortId")
+                        .HasColumnType("int");
+
+                    b.HasKey("GeometryId");
+
+                    b.HasIndex("LocationId");
+
+                    b.HasIndex("ViewPortId");
+
+                    b.ToTable("Geometry");
                 });
 
             modelBuilder.Entity("WeekendWindow.Models.GooglePlaces", b =>
@@ -1012,6 +1164,194 @@ namespace WeekendWindow.Migrations
                         });
                 });
 
+            modelBuilder.Entity("WeekendWindow.Models.Location", b =>
+                {
+                    b.Property<int>("LocationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<float>("lat")
+                        .HasColumnType("real");
+
+                    b.Property<float>("lng")
+                        .HasColumnType("real");
+
+                    b.HasKey("LocationId");
+
+                    b.ToTable("Location");
+                });
+
+            modelBuilder.Entity("WeekendWindow.Models.NearbyPlaces", b =>
+                {
+                    b.Property<int>("NearbyPlacesId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("next_page_token")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("NearbyPlacesId");
+
+                    b.ToTable("NearbyPlaces");
+                });
+
+            modelBuilder.Entity("WeekendWindow.Models.Northeast", b =>
+                {
+                    b.Property<int>("NortheastId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<float>("lat")
+                        .HasColumnType("real");
+
+                    b.Property<float>("lng")
+                        .HasColumnType("real");
+
+                    b.HasKey("NortheastId");
+
+                    b.ToTable("Northeast");
+                });
+
+            modelBuilder.Entity("WeekendWindow.Models.Opening_Hours", b =>
+                {
+                    b.Property<int>("Opening_HoursId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("open_now")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Opening_HoursId");
+
+                    b.ToTable("Opening_Hours");
+                });
+
+            modelBuilder.Entity("WeekendWindow.Models.Photo", b =>
+                {
+                    b.Property<int>("PhotoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Resultid")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("height")
+                        .HasColumnType("int");
+
+                    b.Property<string>("photo_reference")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("width")
+                        .HasColumnType("int");
+
+                    b.HasKey("PhotoId");
+
+                    b.HasIndex("Resultid");
+
+                    b.ToTable("Photo");
+                });
+
+            modelBuilder.Entity("WeekendWindow.Models.Plus_Code", b =>
+                {
+                    b.Property<int>("Plus_CodeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("compound_code")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("global_code")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Plus_CodeId");
+
+                    b.ToTable("Plus_Code");
+                });
+
+            modelBuilder.Entity("WeekendWindow.Models.Result", b =>
+                {
+                    b.Property<string>("id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("GeometryId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("NearbyPlacesId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Opening_HoursId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Plus_CodeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("icon")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("place_id")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("price_level")
+                        .HasColumnType("int");
+
+                    b.Property<float>("rating")
+                        .HasColumnType("real");
+
+                    b.Property<string>("reference")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("scope")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("user_ratings_total")
+                        .HasColumnType("int");
+
+                    b.Property<string>("vicinity")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("GeometryId");
+
+                    b.HasIndex("NearbyPlacesId");
+
+                    b.HasIndex("Opening_HoursId");
+
+                    b.HasIndex("Plus_CodeId");
+
+                    b.ToTable("Result");
+                });
+
+            modelBuilder.Entity("WeekendWindow.Models.Southwest", b =>
+                {
+                    b.Property<int>("SouthwestId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<float>("lat")
+                        .HasColumnType("real");
+
+                    b.Property<float>("lng")
+                        .HasColumnType("real");
+
+                    b.HasKey("SouthwestId");
+
+                    b.ToTable("Southwest");
+                });
+
             modelBuilder.Entity("WeekendWindow.Models.State", b =>
                 {
                     b.Property<int>("StateId")
@@ -1454,6 +1794,79 @@ namespace WeekendWindow.Migrations
                     b.ToTable("ViewerLocation");
                 });
 
+            modelBuilder.Entity("WeekendWindow.Models.Viewport", b =>
+                {
+                    b.Property<int>("ViewPortId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("NortheastId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SouthwestId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ViewPortId");
+
+                    b.HasIndex("NortheastId");
+
+                    b.HasIndex("SouthwestId");
+
+                    b.ToTable("Viewport");
+                });
+
+            modelBuilder.Entity("WeekendWindow.Models.Weather", b =>
+                {
+                    b.Property<int>("WeatherId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("code")
+                        .HasColumnType("int");
+
+                    b.Property<string>("description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("icon")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("WeatherId");
+
+                    b.ToTable("Weather");
+                });
+
+            modelBuilder.Entity("WeekendWindow.Models.WeatherForecast", b =>
+                {
+                    b.Property<int>("WeatherForecastId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("city_name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("country_code")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("lat")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("lon")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("state_code")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("timezone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("WeatherForecastId");
+
+                    b.ToTable("WeatherForecast");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -1512,6 +1925,28 @@ namespace WeekendWindow.Migrations
                         .HasForeignKey("IdentityUserId");
                 });
 
+            modelBuilder.Entity("WeekendWindow.Models.Datum", b =>
+                {
+                    b.HasOne("WeekendWindow.Models.WeatherForecast", null)
+                        .WithMany("data")
+                        .HasForeignKey("WeatherForecastId");
+
+                    b.HasOne("WeekendWindow.Models.Weather", "weather")
+                        .WithMany()
+                        .HasForeignKey("WeatherId");
+                });
+
+            modelBuilder.Entity("WeekendWindow.Models.Geometry", b =>
+                {
+                    b.HasOne("WeekendWindow.Models.Location", "location")
+                        .WithMany()
+                        .HasForeignKey("LocationId");
+
+                    b.HasOne("WeekendWindow.Models.Viewport", "viewport")
+                        .WithMany()
+                        .HasForeignKey("ViewPortId");
+                });
+
             modelBuilder.Entity("WeekendWindow.Models.GooglePlacesAttitude", b =>
                 {
                     b.HasOne("WeekendWindow.Models.Attitude", "Attitude")
@@ -1525,6 +1960,32 @@ namespace WeekendWindow.Migrations
                         .HasForeignKey("GPAGooglePlacesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("WeekendWindow.Models.Photo", b =>
+                {
+                    b.HasOne("WeekendWindow.Models.Result", null)
+                        .WithMany("photos")
+                        .HasForeignKey("Resultid");
+                });
+
+            modelBuilder.Entity("WeekendWindow.Models.Result", b =>
+                {
+                    b.HasOne("WeekendWindow.Models.Geometry", "geometry")
+                        .WithMany()
+                        .HasForeignKey("GeometryId");
+
+                    b.HasOne("WeekendWindow.Models.NearbyPlaces", null)
+                        .WithMany("results")
+                        .HasForeignKey("NearbyPlacesId");
+
+                    b.HasOne("WeekendWindow.Models.Opening_Hours", "opening_hours")
+                        .WithMany()
+                        .HasForeignKey("Opening_HoursId");
+
+                    b.HasOne("WeekendWindow.Models.Plus_Code", "plus_code")
+                        .WithMany()
+                        .HasForeignKey("Plus_CodeId");
                 });
 
             modelBuilder.Entity("WeekendWindow.Models.Viewer", b =>
@@ -1547,6 +2008,17 @@ namespace WeekendWindow.Migrations
                         .HasForeignKey("ViewerLocationViewerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("WeekendWindow.Models.Viewport", b =>
+                {
+                    b.HasOne("WeekendWindow.Models.Northeast", "northeast")
+                        .WithMany()
+                        .HasForeignKey("NortheastId");
+
+                    b.HasOne("WeekendWindow.Models.Southwest", "southwest")
+                        .WithMany()
+                        .HasForeignKey("SouthwestId");
                 });
 #pragma warning restore 612, 618
         }
