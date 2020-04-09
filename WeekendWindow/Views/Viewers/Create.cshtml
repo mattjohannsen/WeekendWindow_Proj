@@ -14,12 +14,12 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
+                <label asp-for="FirstName" class="control-label">First Name</label>
                 <input asp-for="FirstName" class="form-control" />
                 <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
+                <label asp-for="LastName" class="control-label"> Last Name</label>
                 <input asp-for="LastName" class="form-control" />
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
@@ -34,33 +34,23 @@
                 </select>
             </div>
             <div class="form-group">
-                <label asp-for="ViewerAddress" class="control-label"></label>
+                <label asp-for="ViewerAddress" class="control-label">Address</label>
                 <input asp-for="ViewerAddress" class="form-control" />
                 <span asp-validation-for="ViewerAddress" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ViewerCity" class="control-label"></label>
+                <label asp-for="ViewerCity" class="control-label">City</label>
                 <input asp-for="ViewerCity" class="form-control" />
                 <span asp-validation-for="ViewerCity" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ViewerZip" class="control-label"></label>
+                <label asp-for="ViewerZip" class="control-label">Zip Code</label>
                 <input asp-for="ViewerZip" class="form-control" />
                 <span asp-validation-for="ViewerZip" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ViewerState" class="control-label"></label>
+                <label asp-for="ViewerState" class="control-label">State</label>
                 <select asp-for="ViewerState" class="form-control" asp-items="ViewBag.States"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="ViewerLong" class="control-label"></label>
-                <input asp-for="ViewerLong" class="form-control" />
-                <span asp-validation-for="ViewerLong" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ViewerLat" class="control-label"></label>
-                <input asp-for="ViewerLat" class="form-control" />
-                <span asp-validation-for="ViewerLat" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -70,7 +60,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Home</a>
 </div>
 
 @section Scripts {
