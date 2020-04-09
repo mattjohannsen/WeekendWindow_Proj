@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WeekendWindow.Migrations
 {
-    public partial class Initialupdatedfields : Migration
+    public partial class twilioupdate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -623,8 +623,8 @@ namespace WeekendWindow.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "151cf30b-76c9-4a01-9a6c-c3e78bff4f47", "8ef59176-655f-423a-b84e-971068050d5a", "Admin", "ADMIN" },
-                    { "35cdcae7-ad48-468b-8156-7a066baacca0", "e0bac8f0-77a0-49f4-a147-cbd6e79f2e7f", "Viewer", "VIEWER" }
+                    { "88dc246e-6a95-4db3-b828-c2ba83c7c135", "8b3df456-9289-4745-8a06-a509696b5e3a", "Admin", "ADMIN" },
+                    { "0bcbde09-7d1a-4cab-a606-0cc2eb0873b4", "1122de29-7f87-4cd0-9294-9f7bcbd3b93c", "Viewer", "VIEWER" }
                 });
 
             migrationBuilder.InsertData(
