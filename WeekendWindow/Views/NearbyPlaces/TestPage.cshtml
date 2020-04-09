@@ -1,0 +1,75 @@
+﻿@model WeekendWindow.ViewModels.MapViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+<h1>Index</h1>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NearbyPlaces.results[0].name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NearbyPlaces.results[0].place_id)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.NearbyPlaces.results.Length; i++)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.NearbyPlaces.results[i].name)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.NearbyPlaces.results[i].place_id)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+<br />
+<p>@APIKEYS.GoogleAPIKey</p>
+<style>
+    /* Set the size of the div element that contains the map */
+    #map {
+        height: 400px; /* The height is 400 pixels */
+        width: 100%; /* The width is the width of the web page */
+    }
+</style>
+<!--The div element for the map -->
+<div id="map"></div>
+<script>
+// Initialize and add the map
+function initMap() {
+var address = { lat: @Model.NearbyPlaces.results[0].geometry.location.lat, lng: @Model.NearbyPlaces.results[0].geometry.location.lng};
+var map = new google.maps.Map(
+document.getElementById('map'), { zoom: 15, center: address });
+@foreach(Result result in Model.NearbyPlaces.results)
+{
+<text> addMarker({
+coords: { lat: @result.geometry.location.lat, lng: @result.geometry.location.lng },
+content: '<h2>@result.name</h2>' + '<br>' + '<h5>Price Level(0-5): @result.price_level</h5>' + '<h5>Rating(0-5): @result.rating</h5>'
++'<h5>@result.vicinity</h5>'
+});</text>
+}
+function addMarker(props) {
+var marker = new google.maps.Marker({ position: props.coords, map: map });
+if (props.content) {
+var infoWindow = new google.maps.InfoWindow({
+content: props.content
+});
+marker.addListener('click', function () {
+infoWindow.open(map, marker)
+});
+}
+}
+}
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=@APIKEYS.GoogleAPIKey&callback=initMap"
+        async defer></script>
