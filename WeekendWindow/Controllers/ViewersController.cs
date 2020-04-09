@@ -116,11 +116,12 @@ namespace WeekendWindow.Controllers
             {
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
                 viewer.IdentityUserId = userId;
-                string[] streetAddress = viewer.ViewerAddress.Split(' ');
-                string houseNum = streetAddress[0];
-                string street = streetAddress[2];
-                string streetType = streetAddress[3];
-                string address = (houseNum+"+"+street+"+"+streetType + ", +" + viewer.ViewerCity.ToString() + ",+" + viewer.ViewerState.ToString());
+                //string[] streetAddress = viewer.ViewerAddress.Split(' ');
+                //string houseNum = streetAddress[0];
+                //string street = streetAddress[2];
+                //string streetType = streetAddress[3];
+                //string address = (houseNum+"+"+street+"+"+streetType + ", +" + viewer.ViewerCity.ToString() + ",+" + viewer.ViewerState.ToString());                
+                string address = (viewer.ViewerAddress + ", +" + viewer.ViewerCity.ToString() + ",+" + viewer.ViewerState.ToString());
                 GeoLocation location = await _geoCodeRequest.GetGeoLocation(address);
                 viewer.ViewerLat = location.results[0].geometry.location.lat.ToString();
                 viewer.ViewerLong = location.results[0].geometry.location.lng.ToString();
