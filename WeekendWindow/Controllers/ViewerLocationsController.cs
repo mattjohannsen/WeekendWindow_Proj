@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using WeekendWindow.Contracts;
 using WeekendWindow.Data;
 using WeekendWindow.Models;
 
@@ -14,10 +15,12 @@ namespace WeekendWindow.Controllers
     public class ViewerLocationsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IGeoCodeRequest _geoCodeRequest;
 
-        public ViewerLocationsController(ApplicationDbContext context)
+        public ViewerLocationsController(ApplicationDbContext context, IGeoCodeRequest geoCodeRequest)
         {
             _context = context;
+            _geoCodeRequest = geoCodeRequest;
         }
 
         // GET: ViewerLocations
@@ -68,6 +71,12 @@ namespace WeekendWindow.Controllers
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
                 Viewer currentviewer = _context.Viewers.Where(v=> v.IdentityUserId == userId).FirstOrDefault();
                 viewerLocation.ViewerLocationViewerId = currentviewer.ViewerId;
+                string state = _context.State.Where(a => a.StateId == viewerLocation.ViewerLocationStateId).FirstOrDefault().StateAbbreviation.ToString();
+                string address = (viewerLocation.ViewerLocationAddress.ToString() + ", +" + viewerLocation.ViewerLocationCity.ToString() + ",+" + state);
+                GeoLocation location = await _geoCodeRequest.GetGeoLocation(address);
+                viewerLocation.ViewerLocationLat = location.results[0].geometry.location.lat.ToString();
+                viewerLocation.ViewerLocationLong = location.results[0].geometry.location.lng.ToString();
+                viewerLocation.State = _context.State.Where(a => a.StateId == viewerLocation.ViewerLocationStateId).FirstOrDefault();
                 _context.Add(viewerLocation);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -115,6 +124,10 @@ namespace WeekendWindow.Controllers
                     var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
                     Viewer currentviewer = _context.Viewers.Where(v => v.IdentityUserId == userId).FirstOrDefault();
                     viewerLocation.ViewerLocationViewerId = currentviewer.ViewerId;
+                    string address = (viewerLocation.ViewerLocationAddress.ToString() + ", +" + viewerLocation.ViewerLocationCity.ToString() + ",+" + viewerLocation.State.ToString());
+                    GeoLocation location = await _geoCodeRequest.GetGeoLocation(address);
+                    viewerLocation.ViewerLocationLat = location.results[0].geometry.location.lat.ToString();
+                    viewerLocation.ViewerLocationLong = location.results[0].geometry.location.lng.ToString();
                     _context.Update(viewerLocation);
                     await _context.SaveChangesAsync();
                 }

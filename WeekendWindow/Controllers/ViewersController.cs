@@ -19,8 +19,8 @@ namespace WeekendWindow.Controllers
     {
         private readonly ApplicationDbContext _context;
 
-        private IForecastRequest _forecastRequest;
-        private IGeoCodeRequest _geoCodeRequest;
+        private readonly IForecastRequest _forecastRequest;
+        private readonly IGeoCodeRequest _geoCodeRequest;
 
         public ViewersController(ApplicationDbContext context, IForecastRequest forecastRequest, IGeoCodeRequest geoCodeRequest)
         {
@@ -116,12 +116,7 @@ namespace WeekendWindow.Controllers
             {
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
                 viewer.IdentityUserId = userId;
-                //string[] streetAddress = viewer.ViewerAddress.Split(' ');
-                //string houseNum = streetAddress[0];
-                //string street = streetAddress[2];
-                //string streetType = streetAddress[3];
-                //string address = (houseNum+"+"+street+"+"+streetType + ", +" + viewer.ViewerCity.ToString() + ",+" + viewer.ViewerState.ToString());                
-                string address = (viewer.ViewerAddress + ", +" + viewer.ViewerCity.ToString() + ",+" + viewer.ViewerState.ToString());
+                string address = (viewer.ViewerAddress.ToString() + ", +" + viewer.ViewerCity.ToString() + ",+" + viewer.ViewerState.ToString());
                 GeoLocation location = await _geoCodeRequest.GetGeoLocation(address);
                 viewer.ViewerLat = location.results[0].geometry.location.lat.ToString();
                 viewer.ViewerLong = location.results[0].geometry.location.lng.ToString();
@@ -171,6 +166,10 @@ namespace WeekendWindow.Controllers
                 {
                     var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
                     viewer.IdentityUserId = userId;
+                    string address = (viewer.ViewerAddress.ToString() + ", +" + viewer.ViewerCity.ToString() + ",+" + viewer.ViewerState.ToString());
+                    GeoLocation location = await _geoCodeRequest.GetGeoLocation(address);
+                    viewer.ViewerLat = location.results[0].geometry.location.lat.ToString();
+                    viewer.ViewerLong = location.results[0].geometry.location.lng.ToString();
                     _context.Update(viewer);
                     await _context.SaveChangesAsync();
                 }
