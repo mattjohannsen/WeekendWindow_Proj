@@ -18,5 +18,7 @@ namespace WeekendWindow.Models
         public string FirstName { get; set; }
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
+        [NotMapped]
+        public IEnumerable<Viewer> ViewersToNotify { get; set; }
     }
 }

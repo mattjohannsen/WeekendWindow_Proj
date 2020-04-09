@@ -1,0 +1,50 @@
+﻿@model WeekendWindow.Models.Admin
+
+@{
+    ViewData["Title"] = "Notify";
+    Layout = "~/Views/Shared/_Layout-Admin.cshtml";
+}
+
+<h1>Notify</h1>
+
+<div>
+    <h4>Admin</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdentityUser)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdentityUser.Id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+    </dl>
+</div>
+<div>
+    <table>
+        @foreach (var item in Model.ViewersToNotify)
+        {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.FirstName) - @Html.DisplayFor(modelItem => item.LastName)</td>
+            <td>@Html.DisplayFor(modelItem => item.IdentityUser.PhoneNumber)</td>
+            <td>@DateTime.Now.DayOfWeek</td>
+        </tr>
+        }
+        </table>
+
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.AdminId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

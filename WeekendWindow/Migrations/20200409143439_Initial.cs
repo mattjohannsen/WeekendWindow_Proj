@@ -355,6 +355,7 @@ namespace WeekendWindow.Migrations
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     HomeLocationId = table.Column<int>(nullable: true),
+                    ViewerPhone = table.Column<string>(nullable: true),
                     NotificationDay = table.Column<int>(nullable: false),
                     ViewerAddress = table.Column<string>(nullable: true),
                     ViewerCity = table.Column<string>(nullable: true),
@@ -622,8 +623,8 @@ namespace WeekendWindow.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "070d610d-6c31-435f-8529-467e70d1d3c1", "edbfe928-7c4b-46a3-a4bf-c9077f222be2", "Admin", "ADMIN" },
-                    { "0ea399e8-b915-4fd4-a22f-ddbc9e639a8e", "6f948da0-a91a-44f2-9ae9-0e5748417012", "Viewer", "VIEWER" }
+                    { "ed7c4089-8fba-477c-b5d6-86bf4c630938", "03932596-c3ca-4454-9a32-bf9664a68e52", "Admin", "ADMIN" },
+                    { "d33c0d9f-0b57-4780-8d7a-9a5c5d28cfff", "c8f9ac2d-1cbb-4a45-bc74-11d70927743d", "Viewer", "VIEWER" }
                 });
 
             migrationBuilder.InsertData(

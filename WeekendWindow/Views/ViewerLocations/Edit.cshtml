@@ -15,11 +15,6 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ViewerLocationId" />
             <div class="form-group">
-                <label asp-for="ViewerLocationViewerId" class="control-label"></label>
-                <select asp-for="ViewerLocationViewerId" class="form-control" asp-items="ViewBag.ViewerLocationViewerId"></select>
-                <span asp-validation-for="ViewerLocationViewerId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="ViewerLocationName" class="control-label"></label>
                 <input asp-for="ViewerLocationName" class="form-control" />
                 <span asp-validation-for="ViewerLocationName" class="text-danger"></span>
@@ -53,11 +48,6 @@
                 <label asp-for="ViewerLocationLat" class="control-label"></label>
                 <input asp-for="ViewerLocationLat" class="form-control" />
                 <span asp-validation-for="ViewerLocationLat" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="ViewerIsHomeLocation" /> @Html.DisplayNameFor(model => model.ViewerIsHomeLocation)
-                </label>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

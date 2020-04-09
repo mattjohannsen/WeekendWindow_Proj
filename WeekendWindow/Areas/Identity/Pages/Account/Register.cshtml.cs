@@ -66,7 +66,6 @@ namespace WeekendWindow.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
-
             [Required] 
             public string Role { get; set; }
 

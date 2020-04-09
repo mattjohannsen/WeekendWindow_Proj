@@ -19,6 +19,30 @@ namespace WeekendWindow.Controllers
             _context = context;
         }
 
+        // NOTIFY: Viewers
+        public async Task<IActionResult> Notify(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var admin = await _context.Admins
+                .Include(a => a.IdentityUser)
+                .FirstOrDefaultAsync(m => m.AdminId == id);
+            if (admin == null)
+            {
+                return NotFound();
+            }
+            //var currentDay = DateTime.Now.DayOfWeek.ToString();
+            int currentDay = (int)DateTime.Now.DayOfWeek;
+            var viewerslist = _context.Viewers.Where(v => v.NotificationDay == currentDay).ToList();
+            admin.ViewersToNotify = viewerslist;
+
+
+            return View(admin);
+        }
+
         // GET: Admins
         public async Task<IActionResult> Index()
         {

@@ -48,15 +48,15 @@ namespace WeekendWindow.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "070d610d-6c31-435f-8529-467e70d1d3c1",
-                            ConcurrencyStamp = "edbfe928-7c4b-46a3-a4bf-c9077f222be2",
+                            Id = "ed7c4089-8fba-477c-b5d6-86bf4c630938",
+                            ConcurrencyStamp = "03932596-c3ca-4454-9a32-bf9664a68e52",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "0ea399e8-b915-4fd4-a22f-ddbc9e639a8e",
-                            ConcurrencyStamp = "6f948da0-a91a-44f2-9ae9-0e5748417012",
+                            Id = "d33c0d9f-0b57-4780-8d7a-9a5c5d28cfff",
+                            ConcurrencyStamp = "c8f9ac2d-1cbb-4a45-bc74-11d70927743d",
                             Name = "Viewer",
                             NormalizedName = "VIEWER"
                         });
@@ -1794,6 +1794,9 @@ namespace WeekendWindow.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ViewerLong")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ViewerPhone")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ViewerState")

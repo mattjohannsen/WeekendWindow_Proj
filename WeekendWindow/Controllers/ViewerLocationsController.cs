@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -49,7 +50,7 @@ namespace WeekendWindow.Controllers
         // GET: ViewerLocations/Create
         public IActionResult Create()
         {
-            ViewData["ViewerLocationStateId"] = new SelectList(_context.State, "StateId", "StateId");
+            ViewData["ViewerLocationStateId"] = new SelectList(_context.State, "StateId", "StateName");
             ViewData["ViewerLocationViewerId"] = new SelectList(_context.Viewers, "ViewerId", "ViewerId");
             return View();
         }
@@ -63,12 +64,16 @@ namespace WeekendWindow.Controllers
         {
             if (ModelState.IsValid)
             {
+                //Add code here to put the Viewer's ViewerId into database.
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                Viewer currentviewer = _context.Viewers.Where(v=> v.IdentityUserId == userId).FirstOrDefault();
+                viewerLocation.ViewerLocationViewerId = currentviewer.ViewerId;
                 _context.Add(viewerLocation);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ViewerLocationStateId"] = new SelectList(_context.State, "StateId", "StateId", viewerLocation.ViewerLocationStateId);
-            ViewData["ViewerLocationViewerId"] = new SelectList(_context.Viewers, "ViewerId", "ViewerId", viewerLocation.ViewerLocationViewerId);
+            ViewData["ViewerLocationStateId"] = new SelectList(_context.State, "StateId", "StateAbbreviation", viewerLocation.ViewerLocationStateId);
+            //ViewData["ViewerLocationViewerId"] = new SelectList(_context.Viewers, "ViewerId", "ViewerId", viewerLocation.ViewerLocationViewerId);
             return View(viewerLocation);
         }
 
@@ -85,8 +90,8 @@ namespace WeekendWindow.Controllers
             {
                 return NotFound();
             }
-            ViewData["ViewerLocationStateId"] = new SelectList(_context.State, "StateId", "StateId", viewerLocation.ViewerLocationStateId);
-            ViewData["ViewerLocationViewerId"] = new SelectList(_context.Viewers, "ViewerId", "ViewerId", viewerLocation.ViewerLocationViewerId);
+            ViewData["ViewerLocationStateId"] = new SelectList(_context.State, "StateId", "StateAbbreviation", viewerLocation.ViewerLocationStateId);
+            //ViewData["ViewerLocationViewerId"] = new SelectList(_context.Viewers, "ViewerId", "ViewerId", viewerLocation.ViewerLocationViewerId);
             return View(viewerLocation);
         }
 
@@ -106,6 +111,10 @@ namespace WeekendWindow.Controllers
             {
                 try
                 {
+                    //Here is where we update the ViewerId
+                    var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                    Viewer currentviewer = _context.Viewers.Where(v => v.IdentityUserId == userId).FirstOrDefault();
+                    viewerLocation.ViewerLocationViewerId = currentviewer.ViewerId;
                     _context.Update(viewerLocation);
                     await _context.SaveChangesAsync();
                 }
@@ -122,7 +131,7 @@ namespace WeekendWindow.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ViewerLocationStateId"] = new SelectList(_context.State, "StateId", "StateId", viewerLocation.ViewerLocationStateId);
+            ViewData["ViewerLocationStateId"] = new SelectList(_context.State, "StateId", "StateName", viewerLocation.ViewerLocationStateId);
             ViewData["ViewerLocationViewerId"] = new SelectList(_context.Viewers, "ViewerId", "ViewerId", viewerLocation.ViewerLocationViewerId);
             return View(viewerLocation);
         }

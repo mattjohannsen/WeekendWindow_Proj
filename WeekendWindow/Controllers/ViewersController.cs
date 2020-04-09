@@ -109,7 +109,7 @@ namespace WeekendWindow.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ViewerId,IdentityUserId,FirstName,LastName,HomeLocationId,NotificationDay, ViewerAddress, ViewerCity, ViewerState, ViewerZip, ViewerLong, ViewerLat")] Viewer viewer)
+        public async Task<IActionResult> Create([Bind("ViewerId,IdentityUserId,FirstName,LastName,ViewerPhone,HomeLocationId,NotificationDay, ViewerAddress, ViewerCity, ViewerState, ViewerZip, ViewerLong, ViewerLat")] Viewer viewer)
         {
             if (ModelState.IsValid)
             {
@@ -148,7 +148,7 @@ namespace WeekendWindow.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ViewerId,IdentityUserId,FirstName,LastName,HomeLocationId,NotificationDay,ViewerAddress, ViewerCity, ViewerState, ViewerZip, ViewerLong, ViewerLat")] Viewer viewer)  
+        public async Task<IActionResult> Edit(int id, [Bind("ViewerId,IdentityUserId,FirstName,LastName,ViewerPhone,HomeLocationId,NotificationDay,ViewerAddress, ViewerCity, ViewerState, ViewerZip, ViewerLong, ViewerLat")] Viewer viewer)  
         {
             if (id != viewer.ViewerId)
             {
