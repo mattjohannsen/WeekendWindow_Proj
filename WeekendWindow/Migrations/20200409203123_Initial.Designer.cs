@@ -10,8 +10,8 @@ using WeekendWindow.Data;
 namespace WeekendWindow.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200409181028_twilioupdate")]
-    partial class twilioupdate
+    [Migration("20200409203123_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,15 +50,15 @@ namespace WeekendWindow.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "88dc246e-6a95-4db3-b828-c2ba83c7c135",
-                            ConcurrencyStamp = "8b3df456-9289-4745-8a06-a509696b5e3a",
+                            Id = "cb29f724-3f6e-4793-a7a3-27b018e375fe",
+                            ConcurrencyStamp = "6cc950f6-9878-4562-92c6-86c7d265cc18",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "0bcbde09-7d1a-4cab-a606-0cc2eb0873b4",
-                            ConcurrencyStamp = "1122de29-7f87-4cd0-9294-9f7bcbd3b93c",
+                            Id = "b8399ae4-fcbc-4e49-abd1-c7ba1b74c37e",
+                            ConcurrencyStamp = "1cb43aed-a0c8-44f1-8d79-b539b0778733",
                             Name = "Viewer",
                             NormalizedName = "VIEWER"
                         });
