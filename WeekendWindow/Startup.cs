@@ -50,6 +50,7 @@ namespace WeekendWindow
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddScoped<INearbySearchRequest, NearbyPlaceSearchRequest>();
+            services.AddScoped<IGeoCodeRequest, GeoLocationRequest>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
