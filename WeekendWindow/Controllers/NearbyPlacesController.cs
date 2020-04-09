@@ -39,6 +39,21 @@ namespace WeekendWindow.Controllers
             return View(mapView);
         }
 
+        // GET: NearbyPlaces
+        public async Task<IActionResult> TestPage()
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var viewer = _context.Viewers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+            NearbyPlaces nearbyPlaces = await _nearbySearchRequest.GetNearbyPlaces();
+            MapViewModel mapView = new MapViewModel()
+            {
+                NearbyPlaces = nearbyPlaces,
+                Viewer = viewer
+            };
+
+            return View(mapView);
+        }
+
         // GET: NearbyPlaces/Details/5
         public async Task<IActionResult> Details(int? id)
         {
