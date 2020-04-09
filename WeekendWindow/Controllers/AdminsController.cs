@@ -40,6 +40,10 @@ namespace WeekendWindow.Controllers
             int currentDay = (int)DateTime.Now.DayOfWeek;
             var viewerslist = _context.Viewers.Where(v => v.NotificationDay == currentDay).ToList();
             admin.ViewersToNotify = viewerslist;
+            foreach (var item in viewerslist)
+            {
+                SendSms(item.ViewerPhone).Wait();
+            }
 
 
             return View(admin);
@@ -183,17 +187,37 @@ namespace WeekendWindow.Controllers
             return _context.Admins.Any(e => e.AdminId == id);
         }
 
-        public async Task SendSms()
+        //public async Task SendSms()
+        //{
+        //    var currentDay = DateTime.Today.DayOfWeek.GetHashCode();
+        //    var viewersList = _context.Viewers.Where(v => v.NotificationDay == currentDay).ToList();
+        //    const string accountSid = APIKEYS.TwilioSid;
+        //    const string authToken = APIKEYS.TwilioToken;
+        //    string phoneNumber = "+1";
+        //    foreach (var phone in viewersList)
+        //    {
+        //        phoneNumber = phone.ViewerPhone;
+        //    }
+        //    TwilioClient.Init(accountSid, authToken);
+        //    var message = await MessageResource.CreateAsync(
+        //    body: "Time to set up your awesome weekend!!!",
+        //    from: new Twilio.Types.PhoneNumber("+19135218316"),
+        //    to: new Twilio.Types.PhoneNumber(phoneNumber)
+        //    );
+        //    Console.WriteLine(viewersList);
+        //}
+
+        public async Task SendSms(string phoneNumber)
         {
             var currentDay = DateTime.Today.DayOfWeek.GetHashCode();
             var viewersList = _context.Viewers.Where(v => v.NotificationDay == currentDay).ToList();
             const string accountSid = APIKEYS.TwilioSid;
             const string authToken = APIKEYS.TwilioToken;
-            string phoneNumber = "+1";
-            foreach (var phone in viewersList)
-            {
-                phoneNumber = phone.ViewerPhone;
-            }
+            //string phoneNumber = "";
+
+            phoneNumber = "+1" + phoneNumber;
+
+            //Console.WriteLine(phoneNumber);
             TwilioClient.Init(accountSid, authToken);
             var message = await MessageResource.CreateAsync(
             body: "Time to set up your awesome weekend!!!",

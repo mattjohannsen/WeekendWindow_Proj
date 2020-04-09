@@ -33,15 +33,18 @@
 </div>
 <div>
     <table>
+        <tr>
+            <td>The following Viewers have been notified:</td>
+        </tr>
         @foreach (var item in Model.ViewersToNotify)
         {
-        <tr>
-            <td>@Html.DisplayFor(modelItem => item.FirstName) - @Html.DisplayFor(modelItem => item.LastName)</td>
-            <td>@Html.DisplayFor(modelItem => item.ViewerPhone)</td>
-            <td>@DateTime.Now.DayOfWeek</td>
-        </tr>
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)</td>
+                <td>@Html.DisplayFor(modelItem => item.ViewerPhone)</td>
+                <td>@DateTime.Now.DayOfWeek</td>
+            </tr>
         }
-        </table>
+    </table>
 
 </div>
 <div>
