@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WeekendWindow.Data;
 
 namespace WeekendWindow.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200409205654_jones2")]
+    partial class jones2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,15 +50,15 @@ namespace WeekendWindow.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "685edd05-3817-40e5-81d8-2f7805fb0761",
-                            ConcurrencyStamp = "d9af8a67-dc4d-430e-94ca-3c9e83b31a8a",
+                            Id = "e2f4b1ae-b38a-485d-885e-8c8de532af1f",
+                            ConcurrencyStamp = "c2fd9788-f95f-4fca-84c8-3b2b33546b73",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "a872ffc7-7dac-4bff-98d1-c56f808b84e1",
-                            ConcurrencyStamp = "b666976b-1bfe-46e0-81ac-5958f30b2e31",
+                            Id = "1c7ba52f-55e3-4b9d-94a6-51414074cc3d",
+                            ConcurrencyStamp = "f1aad935-348e-497e-971c-787852e7e80f",
                             Name = "Viewer",
                             NormalizedName = "VIEWER"
                         });
@@ -1877,52 +1879,6 @@ namespace WeekendWindow.Migrations
                     b.ToTable("Viewport");
                 });
 
-            modelBuilder.Entity("WeekendWindow.Models.WWindow", b =>
-                {
-                    b.Property<int>("WWindowId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime?>("SaturdayDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("SaturdayWeatherId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("SundayDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("SundayWeatherId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TravelRadiusId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WWViewerId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("WantLodging")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("WeekendAttitudeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WeekendLocationId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WeekendLodgingId")
-                        .HasColumnType("int");
-
-                    b.HasKey("WWindowId");
-
-                    b.HasIndex("WWViewerId");
-
-                    b.HasIndex("WeekendLocationId");
-
-                    b.ToTable("WWindow");
-                });
-
             modelBuilder.Entity("WeekendWindow.Models.Weather", b =>
                 {
                     b.Property<int>("WeatherId")
@@ -2126,21 +2082,6 @@ namespace WeekendWindow.Migrations
                     b.HasOne("WeekendWindow.Models.Southwest", "southwest")
                         .WithMany()
                         .HasForeignKey("SouthwestId");
-                });
-
-            modelBuilder.Entity("WeekendWindow.Models.WWindow", b =>
-                {
-                    b.HasOne("WeekendWindow.Models.Viewer", "Viewer")
-                        .WithMany()
-                        .HasForeignKey("WWViewerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WeekendWindow.Models.ViewerLocation", "ViewerLocation")
-                        .WithMany()
-                        .HasForeignKey("WeekendLocationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

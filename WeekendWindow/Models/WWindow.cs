@@ -8,7 +8,7 @@ namespace WeekendWindow.Models
 {
     public class WWindow
     {
-        public int WeekendWindowId { get; set; }
+        public int WWindowId { get; set; }
         [ForeignKey("Viewer")]
         public int WWViewerId { get; set; } //Weekend Window property
         public Viewer Viewer { get; set; } //Viewer property
