@@ -17,9 +17,9 @@ namespace WeekendWindow.Services
         {
 
         }
-        public async Task<WeatherForecast> GetWeatherForecast()
+        public async Task<WeatherForecast> GetWeatherForecast(int viewerZip)
         {
-            string url = $"https://api.weatherbit.io/v2.0/forecast/daily?postal_code=53072&country=US&units=I&key={APIKEYS.weatherbitKey}";
+            string url = $"https://api.weatherbit.io/v2.0/forecast/daily?postal_code={viewerZip}&country=US&units=I&key={APIKEYS.weatherbitKey}";
             HttpClient client = new HttpClient();
             HttpResponseMessage response = await client.GetAsync(url);
             if (response.IsSuccessStatusCode)

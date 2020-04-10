@@ -32,18 +32,22 @@ namespace WeekendWindow.Controllers
         // GET: Viewers
         public async Task<IActionResult> Index()
         {
+
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            Viewer viewer = _context.Viewers.Where(v => v.IdentityUserId == userId).FirstOrDefault();
-            if (viewer != null)
+            var viewerInDb = _context.Viewers.Where(m => m.IdentityUserId == userId).FirstOrDefault();
+
+            
+            if (viewerInDb != null)
             {
                 //var data = new List<WeatherForecast>();
-
-                WeatherForecast forecast = await _forecastRequest.GetWeatherForecast();
+                var viewerZip = Int32.Parse(viewerInDb.ViewerZip);
+                WeatherForecast forecast = await _forecastRequest.GetWeatherForecast(viewerZip);
                 DateTime dt = DateTime.Today;
                 DayOfWeek dw = dt.DayOfWeek;
 
                 int num = (int)DateTime.Today.DayOfWeek;
                 int num2 = (int)dw;
+
 
                 DateTime satNum = DateTime.Today.AddDays(6 - num2);
                 DateTime sunNum = satNum.AddDays(1);

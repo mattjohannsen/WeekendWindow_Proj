@@ -10,6 +10,6 @@ namespace WeekendWindow.Contracts
 {
     public interface IForecastRequest
     {
-        Task<WeatherForecast> GetWeatherForecast();
+        Task<WeatherForecast> GetWeatherForecast(int zipCode);
     }
 }
