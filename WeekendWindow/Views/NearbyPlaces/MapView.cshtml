@@ -1,40 +1,8 @@
 ﻿@model WeekendWindow.ViewModels.MapViewModel
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "MapView";
+    Layout = "~/Views/Shared/_Layout-Viewers.cshtml";
 }
-<h1>Index</h1>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.NearbyPlaces.results[0].name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NearbyPlaces.results[0].place_id)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @for (int i = 0; i < Model.NearbyPlaces.results.Length; i++)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(model => model.NearbyPlaces.results[i].name)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.NearbyPlaces.results[i].place_id)
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-<br />
-<br />
-<p>@APIKEYS.GoogleAPIKey</p>
 <style>
     /* Set the size of the div element that contains the map */
     #map {
@@ -71,5 +39,8 @@ infoWindow.open(map, marker)
 }
 }
 </script>
+
 <script src="https://maps.googleapis.com/maps/api/js?key=@APIKEYS.GoogleAPIKey&callback=initMap"
         async defer></script>
+
+

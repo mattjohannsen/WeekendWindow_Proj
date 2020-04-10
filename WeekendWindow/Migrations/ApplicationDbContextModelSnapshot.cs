@@ -48,15 +48,25 @@ namespace WeekendWindow.Migrations
                     b.HasData(
                         new
                         {
+<<<<<<< HEAD
                             Id = "875ecdf1-aa53-4fd1-a9fc-cc6dcb78156e",
                             ConcurrencyStamp = "71d6b172-ea99-46d9-b797-db1dcdb7a3cd",
+=======
+                            Id = "5386d2c1-4ae7-4e9e-a5a3-3e880341f492",
+                            ConcurrencyStamp = "2bcd6df4-f94c-4782-b548-1bc51ddb5b39",
+>>>>>>> 45961054f04698ff146f22cd13813a12307ba9d3
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
+<<<<<<< HEAD
                             Id = "49406292-17b2-43bf-9bad-cc7021e2760f",
                             ConcurrencyStamp = "ff02989a-2413-4feb-8726-3fb50e3096e2",
+=======
+                            Id = "b44b54bc-4352-4173-b357-6b8dde585a8d",
+                            ConcurrencyStamp = "97868dae-b417-4820-92ad-b93c229afc41",
+>>>>>>> 45961054f04698ff146f22cd13813a12307ba9d3
                             Name = "Viewer",
                             NormalizedName = "VIEWER"
                         });

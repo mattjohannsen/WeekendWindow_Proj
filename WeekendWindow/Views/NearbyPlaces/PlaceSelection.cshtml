@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewData["Title"] = "PlaceSelection";
+    Layout = "~/Views/Shared/_Layout-Viewers.cshtml";
+}
+
+@model WeekendWindow.ViewModels.MapViewModel
+
+<form asp-action="PlaceSelection">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class=" row">
+        <div class="col-md-6">
+            <div class="form-group" id="Places">
+                <select asp-for="SelectedPlace.GooglePlacesType" class="form-control" asp-items="@Model.GooglePlaces"></select>
+            </div>
+        </div>
+        <span asp-validation-for="SelectedPlace" class="text-danger"></span>
+        <div class="form-group">
+            <input type="submit" value="Submit" class="btn btn-primary" />
+        </div>
+    </div>
+</form>
+<br /><br />
+
