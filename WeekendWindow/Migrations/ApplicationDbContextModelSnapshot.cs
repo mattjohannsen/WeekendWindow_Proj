@@ -48,15 +48,15 @@ namespace WeekendWindow.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "69920aa2-1aed-46c7-9253-fc505897bb2a",
-                            ConcurrencyStamp = "cfa29468-31d2-4f67-a667-7015338eee1f",
+                            Id = "875ecdf1-aa53-4fd1-a9fc-cc6dcb78156e",
+                            ConcurrencyStamp = "71d6b172-ea99-46d9-b797-db1dcdb7a3cd",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "ff8481cb-1f42-4c04-b768-e3a3a6c64258",
-                            ConcurrencyStamp = "1d2df7cc-1b9d-41f2-a341-37a17631505f",
+                            Id = "49406292-17b2-43bf-9bad-cc7021e2760f",
+                            ConcurrencyStamp = "ff02989a-2413-4feb-8726-3fb50e3096e2",
                             Name = "Viewer",
                             NormalizedName = "VIEWER"
                         });
@@ -1908,8 +1908,8 @@ namespace WeekendWindow.Migrations
                     b.Property<int>("WeekendLocationId")
                         .HasColumnType("int");
 
-                    b.Property<int>("WeekendLodgingId")
-                        .HasColumnType("int");
+                    b.Property<string>("WeekendLodgingId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("WWindowId");
 

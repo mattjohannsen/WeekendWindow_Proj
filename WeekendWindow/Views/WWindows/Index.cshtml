@@ -1,0 +1,84 @@
+﻿@model IEnumerable<WeekendWindow.Models.WWindow>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout-Viewers.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ViewerLocation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SaturdayDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SundayDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SaturdayWeatherId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SundayWeatherId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WeekendAttitudeId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WantLodging)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WeekendLodgingId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TravelRadiusId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ViewerLocation.ViewerLocationId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SaturdayDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SundayDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SaturdayWeatherId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SundayWeatherId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WeekendAttitudeId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WantLodging)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WeekendLodgingId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TravelRadiusId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.WWindowId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.WWindowId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.WWindowId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

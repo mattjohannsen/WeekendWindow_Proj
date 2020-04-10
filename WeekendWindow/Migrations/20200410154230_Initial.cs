@@ -561,7 +561,7 @@ namespace WeekendWindow.Migrations
                     SundayWeatherId = table.Column<int>(nullable: false),
                     WeekendAttitudeId = table.Column<int>(nullable: false),
                     WantLodging = table.Column<bool>(nullable: false),
-                    WeekendLodgingId = table.Column<int>(nullable: false),
+                    WeekendLodgingId = table.Column<string>(nullable: true),
                     TravelRadiusId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -650,8 +650,8 @@ namespace WeekendWindow.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "69920aa2-1aed-46c7-9253-fc505897bb2a", "cfa29468-31d2-4f67-a667-7015338eee1f", "Admin", "ADMIN" },
-                    { "ff8481cb-1f42-4c04-b768-e3a3a6c64258", "1d2df7cc-1b9d-41f2-a341-37a17631505f", "Viewer", "VIEWER" }
+                    { "875ecdf1-aa53-4fd1-a9fc-cc6dcb78156e", "71d6b172-ea99-46d9-b797-db1dcdb7a3cd", "Admin", "ADMIN" },
+                    { "49406292-17b2-43bf-9bad-cc7021e2760f", "ff02989a-2413-4feb-8726-3fb50e3096e2", "Viewer", "VIEWER" }
                 });
 
             migrationBuilder.InsertData(
