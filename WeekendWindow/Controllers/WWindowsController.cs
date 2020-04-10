@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -65,6 +66,9 @@ namespace WeekendWindow.Controllers
             {
                 _context.Add(wWindow);
                 await _context.SaveChangesAsync();
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                Viewer currentviewer = _context.Viewers.Where(v => v.IdentityUserId == userId).FirstOrDefault();
+                currentviewer.WWindow = wWindow;
                 return RedirectToAction(nameof(Index));
             }
             ViewData["WeekendLocationId"] = new SelectList(_context.ViewerLocation, "ViewerLocationId", "ViewerLocationId", wWindow.WeekendLocationId);

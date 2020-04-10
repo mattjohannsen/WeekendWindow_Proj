@@ -28,6 +28,8 @@ namespace WeekendWindow.Models
         public string ViewerZip { get; set; }
         public string ViewerLong { get; set; }
         public string ViewerLat { get; set; }
+        [NotMapped]
+        public WWindow WWindow { get; set; }
 
     }
 }
