@@ -48,15 +48,15 @@ namespace WeekendWindow.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "cb29f724-3f6e-4793-a7a3-27b018e375fe",
-                            ConcurrencyStamp = "6cc950f6-9878-4562-92c6-86c7d265cc18",
+                            Id = "69920aa2-1aed-46c7-9253-fc505897bb2a",
+                            ConcurrencyStamp = "cfa29468-31d2-4f67-a667-7015338eee1f",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "b8399ae4-fcbc-4e49-abd1-c7ba1b74c37e",
-                            ConcurrencyStamp = "1cb43aed-a0c8-44f1-8d79-b539b0778733",
+                            Id = "ff8481cb-1f42-4c04-b768-e3a3a6c64258",
+                            ConcurrencyStamp = "1d2df7cc-1b9d-41f2-a341-37a17631505f",
                             Name = "Viewer",
                             NormalizedName = "VIEWER"
                         });
@@ -1877,6 +1877,47 @@ namespace WeekendWindow.Migrations
                     b.ToTable("Viewport");
                 });
 
+            modelBuilder.Entity("WeekendWindow.Models.WWindow", b =>
+                {
+                    b.Property<int>("WWindowId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("SaturdayDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("SaturdayWeatherId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("SundayDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("SundayWeatherId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TravelRadiusId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("WantLodging")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("WeekendAttitudeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WeekendLocationId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WeekendLodgingId")
+                        .HasColumnType("int");
+
+                    b.HasKey("WWindowId");
+
+                    b.HasIndex("WeekendLocationId");
+
+                    b.ToTable("WWindow");
+                });
+
             modelBuilder.Entity("WeekendWindow.Models.Weather", b =>
                 {
                     b.Property<int>("WeatherId")
@@ -2080,6 +2121,15 @@ namespace WeekendWindow.Migrations
                     b.HasOne("WeekendWindow.Models.Southwest", "southwest")
                         .WithMany()
                         .HasForeignKey("SouthwestId");
+                });
+
+            modelBuilder.Entity("WeekendWindow.Models.WWindow", b =>
+                {
+                    b.HasOne("WeekendWindow.Models.ViewerLocation", "ViewerLocation")
+                        .WithMany()
+                        .HasForeignKey("WeekendLocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

@@ -549,6 +549,33 @@ namespace WeekendWindow.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "WWindow",
+                columns: table => new
+                {
+                    WWindowId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    WeekendLocationId = table.Column<int>(nullable: false),
+                    SaturdayDate = table.Column<DateTime>(nullable: true),
+                    SundayDate = table.Column<DateTime>(nullable: true),
+                    SaturdayWeatherId = table.Column<int>(nullable: false),
+                    SundayWeatherId = table.Column<int>(nullable: false),
+                    WeekendAttitudeId = table.Column<int>(nullable: false),
+                    WantLodging = table.Column<bool>(nullable: false),
+                    WeekendLodgingId = table.Column<int>(nullable: false),
+                    TravelRadiusId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WWindow", x => x.WWindowId);
+                    table.ForeignKey(
+                        name: "FK_WWindow_ViewerLocation_WeekendLocationId",
+                        column: x => x.WeekendLocationId,
+                        principalTable: "ViewerLocation",
+                        principalColumn: "ViewerLocationId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Result",
                 columns: table => new
                 {
@@ -623,8 +650,8 @@ namespace WeekendWindow.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "cb29f724-3f6e-4793-a7a3-27b018e375fe", "6cc950f6-9878-4562-92c6-86c7d265cc18", "Admin", "ADMIN" },
-                    { "b8399ae4-fcbc-4e49-abd1-c7ba1b74c37e", "1cb43aed-a0c8-44f1-8d79-b539b0778733", "Viewer", "VIEWER" }
+                    { "69920aa2-1aed-46c7-9253-fc505897bb2a", "cfa29468-31d2-4f67-a667-7015338eee1f", "Admin", "ADMIN" },
+                    { "ff8481cb-1f42-4c04-b768-e3a3a6c64258", "1d2df7cc-1b9d-41f2-a341-37a17631505f", "Viewer", "VIEWER" }
                 });
 
             migrationBuilder.InsertData(
@@ -960,6 +987,11 @@ namespace WeekendWindow.Migrations
                 name: "IX_Viewport_SouthwestId",
                 table: "Viewport",
                 column: "SouthwestId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WWindow_WeekendLocationId",
+                table: "WWindow",
+                column: "WeekendLocationId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -995,7 +1027,7 @@ namespace WeekendWindow.Migrations
                 name: "TravelRadius");
 
             migrationBuilder.DropTable(
-                name: "ViewerLocation");
+                name: "WWindow");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -1016,10 +1048,7 @@ namespace WeekendWindow.Migrations
                 name: "Result");
 
             migrationBuilder.DropTable(
-                name: "State");
-
-            migrationBuilder.DropTable(
-                name: "Viewers");
+                name: "ViewerLocation");
 
             migrationBuilder.DropTable(
                 name: "Geometry");
@@ -1034,13 +1063,19 @@ namespace WeekendWindow.Migrations
                 name: "Plus_Code");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "State");
+
+            migrationBuilder.DropTable(
+                name: "Viewers");
 
             migrationBuilder.DropTable(
                 name: "Location");
 
             migrationBuilder.DropTable(
                 name: "Viewport");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Northeast");
