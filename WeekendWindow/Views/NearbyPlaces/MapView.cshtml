@@ -12,6 +12,9 @@
 </style>
 <!--The div element for the map -->
 <div id="map"></div>
+<br /> 
+<br />
+<a asp-action="AttitudeSelectionByID" asp-route-id="@Model.SelectedAttitude.AttitudeId" >Choose New Place</a>
 <script>
 // Initialize and add the map
 function initMap() {
