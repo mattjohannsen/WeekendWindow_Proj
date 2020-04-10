@@ -10,8 +10,8 @@ using WeekendWindow.Data;
 namespace WeekendWindow.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200409223328_jones3")]
-    partial class jones3
+    [Migration("20200410000824_jones2")]
+    partial class jones2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,15 +50,15 @@ namespace WeekendWindow.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "685edd05-3817-40e5-81d8-2f7805fb0761",
-                            ConcurrencyStamp = "d9af8a67-dc4d-430e-94ca-3c9e83b31a8a",
+                            Id = "bd1cbfdf-0d01-40f5-9338-5ca1d92dfc1d",
+                            ConcurrencyStamp = "ddbb0a15-8693-46bb-9a6b-0d1850d70f74",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "a872ffc7-7dac-4bff-98d1-c56f808b84e1",
-                            ConcurrencyStamp = "b666976b-1bfe-46e0-81ac-5958f30b2e31",
+                            Id = "75717de4-33fc-4f84-b3cb-e5d5a878622e",
+                            ConcurrencyStamp = "93d965d8-d955-45b9-a597-1440cd22b5db",
                             Name = "Viewer",
                             NormalizedName = "VIEWER"
                         });
