@@ -71,6 +71,7 @@ namespace WeekendWindow.Controllers
             return View("PlaceSelection", mapView);
         }
 
+
         [HttpPost]
         public async Task<IActionResult> AttitudeSelection(MapViewModel mapView)
         {
@@ -101,6 +102,7 @@ namespace WeekendWindow.Controllers
             NearbyPlaces nearbyPlaces = await _nearbySearchRequest.GetNearbyPlaces(mapView.SelectedPlace.GooglePlacesType,coords);
             mapView.NearbyPlaces = nearbyPlaces;
             return View("MapView", mapView);
+
         }
 
         // GET: NearbyPlaces/Details/5
