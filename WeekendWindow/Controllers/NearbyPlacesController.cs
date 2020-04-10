@@ -46,7 +46,7 @@ namespace WeekendWindow.Controllers
             
             return View(mapView);
         }
-        public async Task<IActionResult> AttitudeSelectionByID(int id)
+        public async Task<IActionResult> PlaceSelectionByID(int id)
         {
 
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -65,7 +65,8 @@ namespace WeekendWindow.Controllers
             MapViewModel mapView = new MapViewModel()
             {
                 Viewer = viewer,
-                GooglePlaces = place
+                GooglePlaces = place,
+                SelectedAttitude = attitude
             };
             return View("PlaceSelection", mapView);
         }
