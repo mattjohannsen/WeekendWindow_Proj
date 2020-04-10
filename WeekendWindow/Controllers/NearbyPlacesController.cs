@@ -46,6 +46,29 @@ namespace WeekendWindow.Controllers
             
             return View(mapView);
         }
+        public async Task<IActionResult> AttitudeSelectionByID(int id)
+        {
+
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var viewer = _context.Viewers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+            var attitude = _context.Attitude.Where(a => a.AttitudeId == id).FirstOrDefault();
+            //var googlePlaces = _context.GooglePlacesAttitude.Where(a => a.GooglePlacesAttitudeId == mapView.SelectedAttitude.AttitudeId).Select(b => b.GooglePlaces).ToList();
+            var googlePlaces = _context.GooglePlacesAttitude.Where(a => a.GPAAttitudeId == attitude.AttitudeId).Select(b => b.GooglePlaces).ToList();
+            List<SelectListItem> place = googlePlaces.ConvertAll(a =>
+            {
+                return new SelectListItem()
+                {
+                    Text = a.GooglePlacesDisplay,
+                    Value = a.GooglePlacesType
+                };
+            });
+            MapViewModel mapView = new MapViewModel()
+            {
+                Viewer = viewer,
+                GooglePlaces = place
+            };
+            return View("PlaceSelection", mapView);
+        }
 
         [HttpPost]
         public async Task<IActionResult> AttitudeSelection(MapViewModel mapView)
@@ -69,8 +92,7 @@ namespace WeekendWindow.Controllers
 
         [HttpPost]
         public async Task<IActionResult> PlaceSelection(MapViewModel mapView)
-        {
-
+        { 
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var viewer = _context.Viewers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
             mapView.Viewer = viewer;
