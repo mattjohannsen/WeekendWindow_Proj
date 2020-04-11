@@ -66,7 +66,7 @@ namespace WeekendWindow.Controllers
                 ViewData["SatLowTemp"] = data[0].low_temp;
                 ViewData["SatWindSpeed"] = data[0].wind_spd;
                 ViewData["SatGustsTo"] = data[0].wind_gust_spd;
-                ViewData["SatWindDir"] = data[0].wind_dir;
+                ViewData["SatWindDir"] = data[0].wind_cdir;
                 ViewData["SatSkies"] = data[0].weather.description;
 
                 //Sunday Weather
@@ -75,7 +75,7 @@ namespace WeekendWindow.Controllers
                 ViewData["SunLowTemp"] = data[1].low_temp;
                 ViewData["SunWindSpeed"] = data[1].wind_spd;
                 ViewData["SunGustsTo"] = data[1].wind_gust_spd;
-                ViewData["SunWindDir"] = data[1].wind_dir;
+                ViewData["SunWindDir"] = data[1].wind_cdir;
                 ViewData["SunSkies"] = data[1].weather.description;
 
 
