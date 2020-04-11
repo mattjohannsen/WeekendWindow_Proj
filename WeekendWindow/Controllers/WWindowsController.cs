@@ -69,7 +69,9 @@ namespace WeekendWindow.Controllers
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
                 Viewer currentviewer = _context.Viewers.Where(v => v.IdentityUserId == userId).FirstOrDefault();
                 currentviewer.WWindow = wWindow;
-                return RedirectToAction(nameof(Index));
+                var viewerId = currentviewer.ViewerId;
+                //return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", "Viewers", new { id = viewerId });
             }
             ViewData["WeekendLocationId"] = new SelectList(_context.ViewerLocation, "ViewerLocationId", "ViewerLocationId", wWindow.WeekendLocationId);
             return View(wWindow);
