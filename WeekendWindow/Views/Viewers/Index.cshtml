@@ -5,30 +5,71 @@
     Layout = "~/Views/Shared/_Layout-Viewers.cshtml";
 }
 
-<h1>View</h1>
 
-<div>
-    <h4>WeatherForecast</h4>
-    <h5>@ViewData["City"]</h5>
-    <h5>@ViewData["State"]</h5>
-       
-    <hr />
+
+    <div>
+        <h5>Weather Forecast For This Upcoming Weekend</h5>
+        <h5>@ViewData["City"]</h5>
+        <h5>@ViewData["State"]</h5>
+
+        <hr />
+
+        <div class="row">
+            <div class="col-4">
+                <table class="table table-striped table-dark">
+                    <thead>
+                        <tr>
+                            <th bgcolor="#e83e8c"><font color="#fff">Condition</font></th>
+                            <th bgcolor="#e83e8c"><font color="#fff">Saturday</font></th>
+                            <th bgcolor="#e83e8c"><font color="#fff">Sunday</font></th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td>Date</td>
+                        <td>@ViewData["SatDate"]</td>
+                        <td>@ViewData["SunDate"]</td>
+                    </tr>
+                    <tr>
+                        <td>High Temp</td>
+                        <td>@ViewData["SatHighTemp"]</td>
+                        <td>@ViewData["SunHighTemp"]</td>
+                    </tr>
+                    <tr>
+                        <td>Low Temp</td>
+                        <td>@ViewData["SatLowTemp"]</td>
+                        <td>@ViewData["SunLowTemp"]</td>
+                    </tr>
+                    <tr>
+                        <td>Wind Speed</td>
+                        <td>@ViewData["SatWindSpeed"]</td>
+                        <td>@ViewData["SunWindSpeed"] </td>
+                    </tr>
+                    <tr>
+                        <td>Gusts to</td>
+                        <td>@ViewData["SatGustsTo"]</td>
+                        <td>@ViewData["SunGustsTo"]</td>
+                    </tr>
+                    <tr>
+                        <td>Wind Dir</td>
+                        <td>@ViewData["SatWindDir"]</td>
+                        <td>@ViewData["SunWindDir"]</td>
+                    </tr>
+                    <tr>
+                        <td>Skies</td>
+                        <td>
+                            @ViewData["SatSkies"]
+                        </td>
+                        <td>@ViewData["SunSkies"]</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     
-        <table>
-            <tr><th>Condition   </th> <th> Saturday                 </th><th> Sunday                    </th>  </tr>
-            <tr><td>Date        </td> <td>@ViewData["SatDate"]      </td><td>@ViewData["SunDate"]       </td>  </tr>
-            <tr><td>High Temp   </td> <td>@ViewData["SatHighTemp"]  </td><td>@ViewData["SunHighTemp"]   </td>  </tr>
-            <tr><td>Low Temp    </td> <td>@ViewData["SatLowTemp"]   </td><td>@ViewData["SunLowTemp"]    </td>  </tr>
-            <tr><td>Wind Speed  </td> <td>@ViewData["SatWindSpeed"] </td><td>@ViewData["SunWindSpeed"]  </td>  </tr>
-            <tr><td>Gusts to    </td> <td>@ViewData["SatGustsTo"]   </td><td>@ViewData["SunGustsTo"]    </td>  </tr>
-            <tr><td>Wind Dir    </td> <td>@ViewData["SatWindDir"]   </td><td>@ViewData["SunWindDir"]    </td>  </tr>
-            <tr><td>Skies       </td> <td>@ViewData["SatSkies"]     </td><td>@ViewData["SunSkies"]      </td>  </tr>
-        </table>
 
-    
 
-   
-</div>
+
+
+    </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.WeatherForecastId">Edit</a> |
     <a asp-action="Index">Back to List</a>
