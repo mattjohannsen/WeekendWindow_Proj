@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -17,11 +18,13 @@ namespace WeekendWindow.Controllers
     {
         private readonly ApplicationDbContext _context;
         private INearbySearchRequest _nearbySearchRequest;
+        private readonly IForecastRequest _forecastRequest;
 
-        public NearbyPlacesController(ApplicationDbContext context, INearbySearchRequest nearbySearchRequest)
+        public NearbyPlacesController(ApplicationDbContext context, INearbySearchRequest nearbySearchRequest, IForecastRequest forecastRequest)
         {
             _context = context;
             _nearbySearchRequest = nearbySearchRequest;
+            _forecastRequest = forecastRequest;
         }
 
         // GET: NearbyPlaces
@@ -54,11 +57,36 @@ namespace WeekendWindow.Controllers
             //var attitude = _context.Attitude.Where(a => a.AttitudeId == id).FirstOrDefault();
             var wWID = _context.WWindow.Select(a => a.WWindowId).FirstOrDefault();
             var wWindow = _context.WWindow.Where(b => b.WWindowId == wWID).FirstOrDefault();
+            var vLoc = _context.ViewerLocation.Where(a => a.ViewerLocationViewerId == viewer.ViewerId).FirstOrDefault();
+            wWindow.ViewerLocation = vLoc;
             viewer.WWindow = wWindow;
             var attitudeID = viewer.WWindow.WeekendAttitudeId;
             var attitude = _context.Attitude.Where(a => a.AttitudeId == attitudeID).FirstOrDefault();
+            WeatherForecast forecast = await _forecastRequest.GetWeatherForecast(Int32.Parse(viewer.WWindow.ViewerLocation.ViewerLocationZip));
+            DateTime dt = DateTime.Today;
+            DayOfWeek dw = dt.DayOfWeek;
+
+            int num = (int)DateTime.Today.DayOfWeek;
+            int num2 = (int)dw;
+
+
+            DateTime satNum = DateTime.Today.AddDays(6 - num2);
+            DateTime sunNum = satNum.AddDays(1);
+
+            string sat = satNum.ToString("yyy-MM-dd", DateTimeFormatInfo.InvariantInfo);
+            string sun = sunNum.ToString("yyy-MM-dd", DateTimeFormatInfo.InvariantInfo);
+
+            var data = forecast.data.Where(d => (d.valid_date == sat) || (d.valid_date == sun)).ToList();
+            List<GooglePlaces> googlePlaces;
             //var googlePlaces = _context.GooglePlacesAttitude.Where(a => a.GooglePlacesAttitudeId == mapView.SelectedAttitude.AttitudeId).Select(b => b.GooglePlaces).ToList();
-            var googlePlaces = _context.GooglePlacesAttitude.Where(a => a.GPAAttitudeId == attitude.AttitudeId).Select(b => b.GooglePlaces).ToList();
+            if (data[0].min_temp > 60 && data[1].min_temp > 60)
+            {
+                 googlePlaces = _context.GooglePlacesAttitude.Where(a => a.GPAAttitudeId == attitude.AttitudeId && a.GooglePlaces.IsOutdoors == true).Select(b => b.GooglePlaces).ToList();
+            }
+            else
+            {
+                 googlePlaces = _context.GooglePlacesAttitude.Where(a => a.GPAAttitudeId == attitude.AttitudeId && a.GooglePlaces.IsOutdoors == false).Select(b => b.GooglePlaces).ToList();
+            }
             List<SelectListItem> places = googlePlaces.ConvertAll(a =>
             {
                 return new SelectListItem()
