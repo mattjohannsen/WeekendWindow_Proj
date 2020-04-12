@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WeekendWindow.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Initupdate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -346,36 +346,6 @@ namespace WeekendWindow.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Viewers",
-                columns: table => new
-                {
-                    ViewerId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IdentityUserId = table.Column<string>(nullable: true),
-                    FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
-                    HomeLocationId = table.Column<int>(nullable: true),
-                    ViewerPhone = table.Column<string>(nullable: true),
-                    NotificationDay = table.Column<int>(nullable: false),
-                    ViewerAddress = table.Column<string>(nullable: true),
-                    ViewerCity = table.Column<string>(nullable: true),
-                    ViewerState = table.Column<string>(nullable: true),
-                    ViewerZip = table.Column<string>(nullable: true),
-                    ViewerLong = table.Column<string>(nullable: true),
-                    ViewerLat = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Viewers", x => x.ViewerId);
-                    table.ForeignKey(
-                        name: "FK_Viewers_AspNetUsers_IdentityUserId",
-                        column: x => x.IdentityUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "GooglePlacesAttitude",
                 columns: table => new
                 {
@@ -490,39 +460,6 @@ namespace WeekendWindow.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ViewerLocation",
-                columns: table => new
-                {
-                    ViewerLocationId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ViewerLocationViewerId = table.Column<int>(nullable: false),
-                    ViewerLocationName = table.Column<string>(nullable: true),
-                    ViewerLocationAddress = table.Column<string>(nullable: true),
-                    ViewerLocationCity = table.Column<string>(nullable: true),
-                    ViewerLocationStateId = table.Column<int>(nullable: false),
-                    ViewerLocationZip = table.Column<string>(nullable: true),
-                    ViewerLocationLong = table.Column<string>(nullable: true),
-                    ViewerLocationLat = table.Column<string>(nullable: true),
-                    ViewerIsHomeLocation = table.Column<bool>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ViewerLocation", x => x.ViewerLocationId);
-                    table.ForeignKey(
-                        name: "FK_ViewerLocation_State_ViewerLocationStateId",
-                        column: x => x.ViewerLocationStateId,
-                        principalTable: "State",
-                        principalColumn: "StateId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ViewerLocation_Viewers_ViewerLocationViewerId",
-                        column: x => x.ViewerLocationViewerId,
-                        principalTable: "Viewers",
-                        principalColumn: "ViewerId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Geometry",
                 columns: table => new
                 {
@@ -546,33 +483,6 @@ namespace WeekendWindow.Migrations
                         principalTable: "Viewport",
                         principalColumn: "ViewPortId",
                         onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "WWindow",
-                columns: table => new
-                {
-                    WWindowId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    WeekendLocationId = table.Column<int>(nullable: false),
-                    SaturdayDate = table.Column<DateTime>(nullable: true),
-                    SundayDate = table.Column<DateTime>(nullable: true),
-                    SaturdayWeatherId = table.Column<int>(nullable: false),
-                    SundayWeatherId = table.Column<int>(nullable: false),
-                    WeekendAttitudeId = table.Column<int>(nullable: false),
-                    WantLodging = table.Column<bool>(nullable: false),
-                    WeekendLodgingId = table.Column<string>(nullable: true),
-                    TravelRadiusId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_WWindow", x => x.WWindowId);
-                    table.ForeignKey(
-                        name: "FK_WWindow_ViewerLocation_WeekendLocationId",
-                        column: x => x.WeekendLocationId,
-                        principalTable: "ViewerLocation",
-                        principalColumn: "ViewerLocationId",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -645,13 +555,104 @@ namespace WeekendWindow.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Viewers",
+                columns: table => new
+                {
+                    ViewerId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IdentityUserId = table.Column<string>(nullable: true),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    HomeLocationId = table.Column<int>(nullable: true),
+                    ViewerPhone = table.Column<string>(nullable: true),
+                    NotificationDay = table.Column<int>(nullable: false),
+                    ViewerAddress = table.Column<string>(nullable: true),
+                    ViewerCity = table.Column<string>(nullable: true),
+                    ViewerState = table.Column<string>(nullable: true),
+                    ViewerZip = table.Column<string>(nullable: true),
+                    ViewerLong = table.Column<string>(nullable: true),
+                    ViewerLat = table.Column<string>(nullable: true),
+                    WWindowId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Viewers", x => x.ViewerId);
+                    table.ForeignKey(
+                        name: "FK_Viewers_AspNetUsers_IdentityUserId",
+                        column: x => x.IdentityUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ViewerLocation",
+                columns: table => new
+                {
+                    ViewerLocationId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ViewerLocationViewerId = table.Column<int>(nullable: false),
+                    ViewerLocationName = table.Column<string>(nullable: true),
+                    ViewerLocationAddress = table.Column<string>(nullable: true),
+                    ViewerLocationCity = table.Column<string>(nullable: true),
+                    ViewerLocationStateId = table.Column<int>(nullable: false),
+                    ViewerLocationZip = table.Column<string>(nullable: true),
+                    ViewerLocationLong = table.Column<string>(nullable: true),
+                    ViewerLocationLat = table.Column<string>(nullable: true),
+                    ViewerIsHomeLocation = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ViewerLocation", x => x.ViewerLocationId);
+                    table.ForeignKey(
+                        name: "FK_ViewerLocation_State_ViewerLocationStateId",
+                        column: x => x.ViewerLocationStateId,
+                        principalTable: "State",
+                        principalColumn: "StateId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ViewerLocation_Viewers_ViewerLocationViewerId",
+                        column: x => x.ViewerLocationViewerId,
+                        principalTable: "Viewers",
+                        principalColumn: "ViewerId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "WWindow",
+                columns: table => new
+                {
+                    WWindowId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    WeekendLocationId = table.Column<int>(nullable: false),
+                    SaturdayDate = table.Column<DateTime>(nullable: true),
+                    SundayDate = table.Column<DateTime>(nullable: true),
+                    SaturdayWeatherId = table.Column<int>(nullable: false),
+                    SundayWeatherId = table.Column<int>(nullable: false),
+                    WeekendAttitudeId = table.Column<int>(nullable: false),
+                    WantLodging = table.Column<bool>(nullable: false),
+                    WeekendLodgingId = table.Column<string>(nullable: true),
+                    TravelRadiusId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WWindow", x => x.WWindowId);
+                    table.ForeignKey(
+                        name: "FK_WWindow_ViewerLocation_WeekendLocationId",
+                        column: x => x.WeekendLocationId,
+                        principalTable: "ViewerLocation",
+                        principalColumn: "ViewerLocationId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "acfadc3c-39f2-4040-af91-bd755e7f237b", "473bd585-2f3c-4ed5-a3a9-ccad7a779015", "Admin", "ADMIN" },
-                    { "176b8fd9-bb04-45a3-8de4-fd85c7903a4a", "301f2e2d-1f2c-4c14-a582-311e09d2f8b6", "Viewer", "VIEWER" }
+                    { "d7138f90-fed6-4bb1-8990-5aad295da4ee", "b3741913-a534-4fe2-9fcd-26ed3050d7f6", "Admin", "ADMIN" },
+                    { "02b88c22-fb45-4791-994e-5d4ade7b2112", "b99e8d93-a28d-4fce-b0d0-1de88857fa64", "Viewer", "VIEWER" }
                 });
 
             migrationBuilder.InsertData(
@@ -979,6 +980,11 @@ namespace WeekendWindow.Migrations
                 column: "IdentityUserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Viewers_WWindowId",
+                table: "Viewers",
+                column: "WWindowId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Viewport_NortheastId",
                 table: "Viewport",
                 column: "NortheastId");
@@ -992,10 +998,30 @@ namespace WeekendWindow.Migrations
                 name: "IX_WWindow_WeekendLocationId",
                 table: "WWindow",
                 column: "WeekendLocationId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Viewers_WWindow_WWindowId",
+                table: "Viewers",
+                column: "WWindowId",
+                principalTable: "WWindow",
+                principalColumn: "WWindowId",
+                onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Viewers_AspNetUsers_IdentityUserId",
+                table: "Viewers");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_ViewerLocation_State_ViewerLocationStateId",
+                table: "ViewerLocation");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_ViewerLocation_Viewers_ViewerLocationViewerId",
+                table: "ViewerLocation");
+
             migrationBuilder.DropTable(
                 name: "Admins");
 
@@ -1027,9 +1053,6 @@ namespace WeekendWindow.Migrations
                 name: "TravelRadius");
 
             migrationBuilder.DropTable(
-                name: "WWindow");
-
-            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
@@ -1048,9 +1071,6 @@ namespace WeekendWindow.Migrations
                 name: "Result");
 
             migrationBuilder.DropTable(
-                name: "ViewerLocation");
-
-            migrationBuilder.DropTable(
                 name: "Geometry");
 
             migrationBuilder.DropTable(
@@ -1063,25 +1083,31 @@ namespace WeekendWindow.Migrations
                 name: "Plus_Code");
 
             migrationBuilder.DropTable(
-                name: "State");
-
-            migrationBuilder.DropTable(
-                name: "Viewers");
-
-            migrationBuilder.DropTable(
                 name: "Location");
 
             migrationBuilder.DropTable(
                 name: "Viewport");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
                 name: "Northeast");
 
             migrationBuilder.DropTable(
                 name: "Southwest");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "State");
+
+            migrationBuilder.DropTable(
+                name: "Viewers");
+
+            migrationBuilder.DropTable(
+                name: "WWindow");
+
+            migrationBuilder.DropTable(
+                name: "ViewerLocation");
         }
     }
 }

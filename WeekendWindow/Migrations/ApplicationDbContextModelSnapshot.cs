@@ -48,15 +48,15 @@ namespace WeekendWindow.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "acfadc3c-39f2-4040-af91-bd755e7f237b",
-                            ConcurrencyStamp = "473bd585-2f3c-4ed5-a3a9-ccad7a779015",
+                            Id = "d7138f90-fed6-4bb1-8990-5aad295da4ee",
+                            ConcurrencyStamp = "b3741913-a534-4fe2-9fcd-26ed3050d7f6",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "176b8fd9-bb04-45a3-8de4-fd85c7903a4a",
-                            ConcurrencyStamp = "301f2e2d-1f2c-4c14-a582-311e09d2f8b6",
+                            Id = "02b88c22-fb45-4791-994e-5d4ade7b2112",
+                            ConcurrencyStamp = "b99e8d93-a28d-4fce-b0d0-1de88857fa64",
                             Name = "Viewer",
                             NormalizedName = "VIEWER"
                         });
@@ -1805,9 +1805,14 @@ namespace WeekendWindow.Migrations
                     b.Property<string>("ViewerZip")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("WWindowId")
+                        .HasColumnType("int");
+
                     b.HasKey("ViewerId");
 
                     b.HasIndex("IdentityUserId");
+
+                    b.HasIndex("WWindowId");
 
                     b.ToTable("Viewers");
                 });
@@ -2095,6 +2100,10 @@ namespace WeekendWindow.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
                         .WithMany()
                         .HasForeignKey("IdentityUserId");
+
+                    b.HasOne("WeekendWindow.Models.WWindow", "WWindow")
+                        .WithMany()
+                        .HasForeignKey("WWindowId");
                 });
 
             modelBuilder.Entity("WeekendWindow.Models.ViewerLocation", b =>

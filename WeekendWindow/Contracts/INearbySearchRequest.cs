@@ -8,6 +8,6 @@ namespace WeekendWindow.Contracts
 {
     public interface INearbySearchRequest
     {
-        Task<NearbyPlaces> GetNearbyPlaces(string type, string coords);
+        Task<NearbyPlaces> GetNearbyPlaces(string type, string coords, string radius);
     }
 }
