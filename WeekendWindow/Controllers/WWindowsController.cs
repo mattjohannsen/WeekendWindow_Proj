@@ -66,14 +66,15 @@ namespace WeekendWindow.Controllers
             {
                 var viewerLocation = _context.ViewerLocation.Where(a => a.ViewerLocationId == wWindow.WeekendLocationId).FirstOrDefault();
                 wWindow.ViewerLocation = viewerLocation;
-                _context.Add(wWindow);
-                await _context.SaveChangesAsync();
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
                 Viewer currentviewer = _context.Viewers.Where(v => v.IdentityUserId == userId).FirstOrDefault();
                 //WWindow ourWWindow = new WWindow();
                 currentviewer.WWindow = wWindow;
                 var viewerId = currentviewer.ViewerId;
                 var testvariable = currentviewer.WWindow.ViewerLocation.ViewerLocationViewerId;
+                _context.Add(wWindow);
+                _context.Viewers.Update(currentviewer);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
                 //return RedirectToAction("Details", "Viewers", new { id = viewerId });
             }

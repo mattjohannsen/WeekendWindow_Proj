@@ -14,11 +14,11 @@
 <div id="map"></div>
 <br /> 
 <br />
-<a asp-action="PlaceSelectionByID" asp-route-id="@Model.SelectedAttitude.AttitudeId" >Choose New Place</a>
+<a asp-action="PlaceSelection" asp-route-id="@Model.SelectedAttitude.AttitudeId" >Choose New Place</a>
 <script>
 // Initialize and add the map
 function initMap() {
-var address = { lat: @Model.NearbyPlaces.results[0].geometry.location.lat, lng: @Model.NearbyPlaces.results[0].geometry.location.lng};
+var address = { lat: @Model.Viewer.WWindow.ViewerLocation.ViewerLocationLat, lng: @Model.Viewer.WWindow.ViewerLocation.ViewerLocationLong};
 var map = new google.maps.Map(
 document.getElementById('map'), { zoom: 15, center: address });
 @foreach(Result result in Model.NearbyPlaces.results)

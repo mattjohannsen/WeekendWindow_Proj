@@ -17,9 +17,9 @@ namespace WeekendWindow.Services
 
         }
 
-        public async Task<NearbyPlaces> GetNearbyPlaces(string type, string coords)
+        public async Task<NearbyPlaces> GetNearbyPlaces(string type, string coords, string radius)
         {
-            string url = $"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={coords}&radius=50000&type={type}&keyword=&key={APIKEYS.GoogleAPIKey}";
+            string url = $"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={coords}&radius={radius}&type={type}&keyword=&key={APIKEYS.GoogleAPIKey}";
             HttpClient client = new HttpClient();
             HttpResponseMessage response = await client.GetAsync(url);
             if (response.IsSuccessStatusCode)

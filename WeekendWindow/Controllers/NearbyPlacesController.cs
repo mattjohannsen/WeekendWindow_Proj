@@ -25,36 +25,41 @@ namespace WeekendWindow.Controllers
         }
 
         // GET: NearbyPlaces
-        public async Task<IActionResult> AttitudeSelection()
-        {
-            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var viewer = _context.Viewers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
-            var attitudes = _context.Attitude.ToList();
-            List<SelectListItem> attitude = attitudes.ConvertAll(a => {
-                return new SelectListItem()
-                {
-                    Text = a.AttitudeName,
-                    Value = a.AttitudeId.ToString()
-                };
-            });
+        //public async Task<IActionResult> AttitudeSelection()
+        //{
+        //    var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+        //    var viewer = _context.Viewers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+        //    var attitudes = _context.Attitude.ToList();
+        //    List<SelectListItem> attitude = attitudes.ConvertAll(a => {
+        //        return new SelectListItem()
+        //        {
+        //            Text = a.AttitudeName,
+        //            Value = a.AttitudeId.ToString()
+        //        };
+        //    });
             
-            MapViewModel mapView = new MapViewModel()
-            {
-                Viewer = viewer,
-                Attitudes = attitude
-            };
+        //    MapViewModel mapView = new MapViewModel()
+        //    {
+        //        Viewer = viewer,
+        //        Attitudes = attitude
+        //    };
             
-            return View(mapView);
-        }
-        public async Task<IActionResult> PlaceSelectionByID(int id)
+        //    return View(mapView);
+        //}
+        public async Task<IActionResult> PlaceSelection()
         {
 
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var viewer = _context.Viewers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
-            var attitude = _context.Attitude.Where(a => a.AttitudeId == id).FirstOrDefault();
+            var viewer =  _context.Viewers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+            //var attitude = _context.Attitude.Where(a => a.AttitudeId == id).FirstOrDefault();
+            var wWID = _context.WWindow.Select(a => a.WWindowId).FirstOrDefault();
+            var wWindow = _context.WWindow.Where(b => b.WWindowId == wWID).FirstOrDefault();
+            viewer.WWindow = wWindow;
+            var attitudeID = viewer.WWindow.WeekendAttitudeId;
+            var attitude = _context.Attitude.Where(a => a.AttitudeId == attitudeID).FirstOrDefault();
             //var googlePlaces = _context.GooglePlacesAttitude.Where(a => a.GooglePlacesAttitudeId == mapView.SelectedAttitude.AttitudeId).Select(b => b.GooglePlaces).ToList();
             var googlePlaces = _context.GooglePlacesAttitude.Where(a => a.GPAAttitudeId == attitude.AttitudeId).Select(b => b.GooglePlaces).ToList();
-            List<SelectListItem> place = googlePlaces.ConvertAll(a =>
+            List<SelectListItem> places = googlePlaces.ConvertAll(a =>
             {
                 return new SelectListItem()
                 {
@@ -65,32 +70,32 @@ namespace WeekendWindow.Controllers
             MapViewModel mapView = new MapViewModel()
             {
                 Viewer = viewer,
-                GooglePlaces = place,
+                GooglePlaces = places,
                 SelectedAttitude = attitude
             };
             return View("PlaceSelection", mapView);
         }
 
 
-        [HttpPost]
-        public async Task<IActionResult> AttitudeSelection(MapViewModel mapView)
-        {
+        //[HttpPost]
+        //public async Task<IActionResult> AttitudeSelection(MapViewModel mapView)
+        //{
 
-            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var viewer = _context.Viewers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
-            //var googlePlaces = _context.GooglePlacesAttitude.Where(a => a.GooglePlacesAttitudeId == mapView.SelectedAttitude.AttitudeId).Select(b => b.GooglePlaces).ToList();
-            var googlePlaces = _context.GooglePlacesAttitude.Where(a => a.GPAAttitudeId == mapView.SelectedAttitude.AttitudeId).Select(b => b.GooglePlaces).ToList();
-            List<SelectListItem> place = googlePlaces.ConvertAll(a => {
-                return new SelectListItem()
-                {
-                    Text = a.GooglePlacesDisplay,
-                    Value = a.GooglePlacesType
-                };
-            }); 
-            mapView.Viewer = viewer;
-            mapView.GooglePlaces = place;
-            return View("PlaceSelection",mapView);
-        }
+        //    var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+        //    var viewer = _context.Viewers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+        //    //var googlePlaces = _context.GooglePlacesAttitude.Where(a => a.GooglePlacesAttitudeId == mapView.SelectedAttitude.AttitudeId).Select(b => b.GooglePlaces).ToList();
+        //    var googlePlaces = _context.GooglePlacesAttitude.Where(a => a.GPAAttitudeId == mapView.SelectedAttitude.AttitudeId).Select(b => b.GooglePlaces).ToList();
+        //    List<SelectListItem> place = googlePlaces.ConvertAll(a => {
+        //        return new SelectListItem()
+        //        {
+        //            Text = a.GooglePlacesDisplay,
+        //            Value = a.GooglePlacesType
+        //        };
+        //    }); 
+        //    mapView.Viewer = viewer;
+        //    mapView.GooglePlaces = place;
+        //    return View("PlaceSelection",mapView);
+        //}
 
         [HttpPost]
         public async Task<IActionResult> PlaceSelection(MapViewModel mapView)
@@ -98,8 +103,15 @@ namespace WeekendWindow.Controllers
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var viewer = _context.Viewers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
             mapView.Viewer = viewer;
-            var coords = mapView.Viewer.ViewerLat + "," + mapView.Viewer.ViewerLong;
-            NearbyPlaces nearbyPlaces = await _nearbySearchRequest.GetNearbyPlaces(mapView.SelectedPlace.GooglePlacesType,coords);
+            var wWID = _context.WWindow.Select(a => a.WWindowId).FirstOrDefault();
+            var wWindow = _context.WWindow.Where(b => b.WWindowId == wWID).FirstOrDefault();
+            var vLoc = _context.ViewerLocation.Where(a => a.ViewerLocationViewerId == viewer.ViewerId).FirstOrDefault();
+            wWindow.ViewerLocation = vLoc;
+            mapView.Viewer.WWindow = wWindow;
+            var coords = mapView.Viewer.WWindow.ViewerLocation.ViewerLocationLat + "," + mapView.Viewer.WWindow.ViewerLocation.ViewerLocationLong;
+            var radiusID = mapView.Viewer.WWindow.TravelRadiusId;
+            var radius = _context.TravelRadius.Where(a => a.TravelRadiusId == radiusID).Select(b => b.RadiumMeters).FirstOrDefault().ToString();
+            NearbyPlaces nearbyPlaces = await _nearbySearchRequest.GetNearbyPlaces(mapView.SelectedPlace.GooglePlacesType,coords,radius);
             mapView.NearbyPlaces = nearbyPlaces;
             return View("MapView", mapView);
 
