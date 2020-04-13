@@ -651,8 +651,8 @@ namespace WeekendWindow.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "7b4086c2-2bf3-4ae1-b325-710f5d6e154b", "191c986f-5207-44aa-b36d-f587b30f9aad", "Admin", "ADMIN" },
-                    { "59e00384-b5cf-4ca5-ba3f-66dc4042ae36", "b638bfa5-8256-475d-ae69-16aeeee030c8", "Viewer", "VIEWER" }
+                    { "6c7e2daa-679d-499f-8684-860830760ddb", "17aa9eb1-a439-4966-bb09-9d6a13afad94", "Admin", "ADMIN" },
+                    { "30642f90-3163-4503-bc64-f41f3a0a0656", "19715fdc-8827-4183-b883-6e572b28e72d", "Viewer", "VIEWER" }
                 });
 
             migrationBuilder.InsertData(
