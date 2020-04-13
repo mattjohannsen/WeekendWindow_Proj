@@ -49,7 +49,7 @@ namespace WeekendWindow.Controllers
                 //var data = new List<WeatherForecast>();
                 var viewerZip = Int32.Parse(viewerInDb.ViewerZip);
                 WeatherForecast forecast;
-                if (viewerInDb.WWindow == null)
+                if (viewerInDb.WWindow == null || viewerInDb.WWindow.ViewerLocation == null || viewerInDb.WWindow.ViewerLocation.ViewerLocationZip == null)
                 {
                     forecast = await _forecastRequest.GetWeatherForecast(viewerZip);
                 }

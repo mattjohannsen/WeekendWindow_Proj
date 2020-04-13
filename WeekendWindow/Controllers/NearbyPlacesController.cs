@@ -81,7 +81,8 @@ namespace WeekendWindow.Controllers
             //var googlePlaces = _context.GooglePlacesAttitude.Where(a => a.GooglePlacesAttitudeId == mapView.SelectedAttitude.AttitudeId).Select(b => b.GooglePlaces).ToList();
             if (data[0].min_temp > 60 && data[1].min_temp > 60)
             {
-                 googlePlaces = _context.GooglePlacesAttitude.Where(a => a.GPAAttitudeId == attitude.AttitudeId && a.GooglePlaces.IsOutdoors == true).Select(b => b.GooglePlaces).ToList();
+                //googlePlaces = _context.GooglePlacesAttitude.Where(a => a.GPAAttitudeId == attitude.AttitudeId && a.GooglePlaces.IsOutdoors == true).Select(b => b.GooglePlaces).ToList();
+                googlePlaces = _context.GooglePlacesAttitude.Where(a => a.GPAAttitudeId == attitude.AttitudeId).Select(b => b.GooglePlaces).ToList();
             }
             else
             {
