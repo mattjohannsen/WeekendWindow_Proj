@@ -118,9 +118,6 @@ namespace WeekendWindow.Controllers
 
 
                 return View(forecast);
-
-                //var applicationDbContext = _context.Viewers.Include(v => v.IdentityUser);
-                //return View(await applicationDbContext.ToListAsync());
             }
             else
             {
@@ -140,9 +137,6 @@ namespace WeekendWindow.Controllers
             var viewer = await _context.Viewers
                 .Include(v => v.IdentityUser)
                 .FirstOrDefaultAsync(m => m.ViewerId == id);
-            //WWindow viewerWWindow = new WWindow();
-            //WWindow viewerWWindow = _context.WWindow.Where(ww => ww.ViewerLocation.ViewerLocationViewerId == id);
-            //viewer.WWindow = viewerWWindow;
             if (viewer == null)
             {
                 return NotFound();

@@ -18,7 +18,6 @@ namespace WeekendWindow.Services
         }
         public async Task<GeoLocation> GetGeoLocation(string address)
         {
-           // address = 1600 + Amphitheatre + Parkway,+Mountain + View,+CA
             string url = $"https://maps.googleapis.com/maps/api/geocode/json?address={address}&key={APIKEYS.GoogleAPIKey}";
             HttpClient client = new HttpClient();
             HttpResponseMessage response = await client.GetAsync(url);

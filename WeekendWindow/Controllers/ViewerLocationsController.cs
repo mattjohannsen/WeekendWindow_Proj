@@ -67,7 +67,6 @@ namespace WeekendWindow.Controllers
         {
             if (ModelState.IsValid)
             {
-                //Add code here to put the Viewer's ViewerId into database.
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
                 Viewer currentviewer = _context.Viewers.Where(v=> v.IdentityUserId == userId).FirstOrDefault();
                 viewerLocation.ViewerLocationViewerId = currentviewer.ViewerId;
@@ -82,7 +81,6 @@ namespace WeekendWindow.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ViewerLocationStateId"] = new SelectList(_context.State, "StateId", "StateAbbreviation", viewerLocation.ViewerLocationStateId);
-            //ViewData["ViewerLocationViewerId"] = new SelectList(_context.Viewers, "ViewerId", "ViewerId", viewerLocation.ViewerLocationViewerId);
             return View(viewerLocation);
         }
 
@@ -100,7 +98,6 @@ namespace WeekendWindow.Controllers
                 return NotFound();
             }
             ViewData["ViewerLocationStateId"] = new SelectList(_context.State, "StateId", "StateAbbreviation", viewerLocation.ViewerLocationStateId);
-            //ViewData["ViewerLocationViewerId"] = new SelectList(_context.Viewers, "ViewerId", "ViewerId", viewerLocation.ViewerLocationViewerId);
             return View(viewerLocation);
         }
 

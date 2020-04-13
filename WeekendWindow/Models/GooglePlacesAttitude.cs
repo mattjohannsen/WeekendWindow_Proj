@@ -10,10 +10,10 @@ namespace WeekendWindow.Models
     {
         public int GooglePlacesAttitudeId { get; set; }
         [ForeignKey("GooglePlaces")]
-        public int GPAGooglePlacesId { get; set; } //GooglePlacesAttitude property
-        public GooglePlaces GooglePlaces { get; set; } //GooglePlaces class
+        public int GPAGooglePlacesId { get; set; } 
+        public GooglePlaces GooglePlaces { get; set; }
         [ForeignKey("Attitude")]
-        public int GPAAttitudeId { get; set; } //GooglePlacesAttitude property
-        public Attitude Attitude { get; set; } //Attitude class
+        public int GPAAttitudeId { get; set; }
+        public Attitude Attitude { get; set; } 
     }
 }

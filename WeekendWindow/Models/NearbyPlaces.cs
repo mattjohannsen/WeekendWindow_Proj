@@ -7,7 +7,6 @@ namespace WeekendWindow.Models
     public class NearbyPlaces
     {
         public int NearbyPlacesId { get; set; }
-        //public object[] html_attributions { get; set; }
         public string next_page_token { get; set; }
         public Result[] results { get; set; }
         public string status { get; set; }
@@ -87,7 +86,6 @@ namespace WeekendWindow.Models
     {
         public int PhotoId { get; set; }
         public int height { get; set; }
-        //public string[] html_attributions { get; set; }
         public string photo_reference { get; set; }
         public int width { get; set; }
     }
