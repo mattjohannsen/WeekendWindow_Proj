@@ -49,14 +49,25 @@ namespace WeekendWindow.Controllers
                 //var data = new List<WeatherForecast>();
                 var viewerZip = Int32.Parse(viewerInDb.ViewerZip);
                 WeatherForecast forecast;
+                if(viewerInDb.WWindow.ViewerLocation == null)
+                {
+                    try
+                    {
+                        var vLoc = _context.ViewerLocation.Where(a => a.ViewerLocationViewerId == viewerInDb.ViewerId).FirstOrDefault();
+                        viewerInDb.WWindow.ViewerLocation = vLoc;
+                    }
+                    catch (ArgumentNullException)
+                    {
+                        forecast = await _forecastRequest.GetWeatherForecast(viewerZip);
+                    }
+                }
                 if (viewerInDb.WWindow == null || viewerInDb.WWindow.ViewerLocation == null || viewerInDb.WWindow.ViewerLocation.ViewerLocationZip == null)
                 {
                     forecast = await _forecastRequest.GetWeatherForecast(viewerZip);
                 }
                 else
                 {
-                    var vLoc = _context.ViewerLocation.Where(a => a.ViewerLocationViewerId == viewerInDb.ViewerId).FirstOrDefault();
-                    viewerInDb.WWindow.ViewerLocation = vLoc;
+                   
                     forecast = await _forecastRequest.GetWeatherForecast(Int32.Parse(viewerInDb.WWindow.ViewerLocation.ViewerLocationZip));
                 }
                 DateTime dt = DateTime.Today;
