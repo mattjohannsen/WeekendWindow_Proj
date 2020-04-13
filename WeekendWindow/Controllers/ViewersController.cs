@@ -36,12 +36,29 @@ namespace WeekendWindow.Controllers
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var viewerInDb = _context.Viewers.Where(m => m.IdentityUserId == userId).FirstOrDefault();
 
-            
             if (viewerInDb != null)
             {
+                if (_context.WWindow != null && viewerInDb.WWindow == null)
+                {
+                    
+                    var wWID = _context.WWindow.Select(b => b.WWindowId).FirstOrDefault();
+                    var wWindow = _context.WWindow.Where(b => b.WWindowId == wWID).FirstOrDefault();
+                    viewerInDb.WWindow = wWindow;
+                    _context.SaveChanges();
+                }
                 //var data = new List<WeatherForecast>();
                 var viewerZip = Int32.Parse(viewerInDb.ViewerZip);
-                WeatherForecast forecast = await _forecastRequest.GetWeatherForecast(viewerZip);
+                WeatherForecast forecast;
+                if (viewerInDb.WWindow == null)
+                {
+                    forecast = await _forecastRequest.GetWeatherForecast(viewerZip);
+                }
+                else
+                {
+                    var vLoc = _context.ViewerLocation.Where(a => a.ViewerLocationViewerId == viewerInDb.ViewerId).FirstOrDefault();
+                    viewerInDb.WWindow.ViewerLocation = vLoc;
+                    forecast = await _forecastRequest.GetWeatherForecast(Int32.Parse(viewerInDb.WWindow.ViewerLocation.ViewerLocationZip));
+                }
                 DateTime dt = DateTime.Today;
                 DayOfWeek dw = dt.DayOfWeek;
 

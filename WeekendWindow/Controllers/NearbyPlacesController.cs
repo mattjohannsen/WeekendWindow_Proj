@@ -55,7 +55,7 @@ namespace WeekendWindow.Controllers
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var viewer =  _context.Viewers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
             //var attitude = _context.Attitude.Where(a => a.AttitudeId == id).FirstOrDefault();
-            var wWID = _context.WWindow.Select(a => a.WWindowId).FirstOrDefault();
+            var wWID = _context.WWindow.Where(a => a.ViewerLocation.Viewer.ViewerId == viewer.ViewerId).Select(b => b.WWindowId).FirstOrDefault();
             var wWindow = _context.WWindow.Where(b => b.WWindowId == wWID).FirstOrDefault();
             var vLoc = _context.ViewerLocation.Where(a => a.ViewerLocationViewerId == viewer.ViewerId).FirstOrDefault();
             wWindow.ViewerLocation = vLoc;
@@ -131,7 +131,7 @@ namespace WeekendWindow.Controllers
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var viewer = _context.Viewers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
             mapView.Viewer = viewer;
-            var wWID = _context.WWindow.Select(a => a.WWindowId).FirstOrDefault();
+            var wWID = _context.WWindow.Where(a => a.ViewerLocation.Viewer.ViewerId == viewer.ViewerId).Select(b => b.WWindowId).FirstOrDefault(); 
             var wWindow = _context.WWindow.Where(b => b.WWindowId == wWID).FirstOrDefault();
             var vLoc = _context.ViewerLocation.Where(a => a.ViewerLocationViewerId == viewer.ViewerId).FirstOrDefault();
             wWindow.ViewerLocation = vLoc;
