@@ -40,21 +40,16 @@
             <span asp-validation-for="SundayWeatherId" class="text-danger"></span>
         </div>*@
             <div class="form-group">
-                <label asp-for="WeekendAttitudeId" class="control-label"></label>
+                <label asp-for="WeekendAttitudeId" class="control-label">Weekend Attitude</label>
                 <select asp-for="WeekendAttitudeId" class="form-control" asp-items="ViewBag.WeekendAttitudeId"></select>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="WantLodging" /> @Html.DisplayNameFor(model => model.WantLodging)
+                    <input class="form-check-input" asp-for="WantLodging" /> Need Lodging
                 </label>
             </div>
             <div class="form-group">
-                <label asp-for="WeekendLodgingId" class="control-label"></label>
-                <input asp-for="WeekendLodgingId" class="form-control" />
-                <span asp-validation-for="WeekendLodgingId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TravelRadiusId" class="control-label"></label>
+                <label asp-for="TravelRadiusId" class="control-label">Travel Radius</label>
                 <select asp-for="TravelRadiusId" class="form-control" asp-items="ViewBag.TravelRadiusId"></select>
             </div>
             <div class="form-group">
