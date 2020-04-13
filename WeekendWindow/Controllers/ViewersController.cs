@@ -44,7 +44,7 @@ namespace WeekendWindow.Controllers
                     var wWID = _context.WWindow.Select(b => b.WWindowId).FirstOrDefault();
                     var wWindow = _context.WWindow.Where(b => b.WWindowId == wWID).FirstOrDefault();
                     viewerInDb.WWindow = wWindow;
-                    _context.SaveChanges();
+                    _context.SaveChanges(); 
                 }
                 //var data = new List<WeatherForecast>();
                 var viewerZip = Int32.Parse(viewerInDb.ViewerZip);
